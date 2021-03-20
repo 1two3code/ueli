@@ -1,6 +1,6 @@
-import { IconType } from "./icon-type";
+import IconType from "./icon-type";
 
 export interface Icon {
-    type: IconType;
-    parameter: string;
+  type: IconType;
+  parameter: string;
 }
