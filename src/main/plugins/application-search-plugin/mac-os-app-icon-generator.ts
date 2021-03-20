@@ -1,5 +1,5 @@
 import { join } from "path";
-import { FileHelpers } from "../../../common/helpers/file-helpers";
+import FileHelpers from "../../../common/helpers/file-helpers";
 import plist from "simple-plist";
 import { applicationIconLocation, getApplicationIconFilePath } from "./application-icon-helpers";
 import { existsSync } from "fs";

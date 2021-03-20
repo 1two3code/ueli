@@ -1,4 +1,4 @@
-import { FileHelpers } from "../../../common/helpers/file-helpers";
+import FileHelpers from "../../../common/helpers/file-helpers";
 import { applicationIconLocation, getApplicationIconFilePath } from "./application-icon-helpers";
 import Shell from "node-powershell";
 

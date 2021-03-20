@@ -1,7 +1,7 @@
 import { Logger } from "./logger";
 import Winston from "winston";
 import { dirname, basename } from "path";
-import { logFormat } from "../helpers/logger-helpers";
+import logFormat from "../helpers/logger-helpers";
 
 export class ProductionLogger implements Logger {
     private readonly logger: Winston.Logger;

@@ -5,7 +5,7 @@ import { TranslationSet } from "../../../common/translation/translation-set";
 import { PluginType } from "../../plugin-type";
 import { UrlOptions } from "../../../common/config/url-options";
 import { defaultUrlIcon } from "../../../common/icon/default-icons";
-import { isValidUrl } from "../../../common/helpers/url-helpers";
+import isValidUrl from "../../../common/helpers/url-helpers";
 
 export class UrlPlugin implements ExecutionPlugin {
     public readonly pluginType = PluginType.Url;

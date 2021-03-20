@@ -1,7 +1,7 @@
 import { WorkflowExecutionStep } from "./workflow-execution-argument";
 import { WorkflowExecutionArgumentType } from "./workflow-execution-argument-type";
 import { existsSync } from "fs";
-import { isValidUrl } from "../../../common/helpers/url-helpers";
+import isValidUrl from "../../../common/helpers/url-helpers";
 import { Workflow } from "./workflow";
 import { isArray } from "util";
 import { isValidIcon } from "../../../common/icon/icon-helpers";

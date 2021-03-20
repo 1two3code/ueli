@@ -52,7 +52,7 @@
 import Vue from "vue";
 import { vueEventDispatcher } from "../../vue-event-dispatcher";
 import { VueEventChannels } from "../../vue-event-channels";
-import { FileHelpers } from "../../../common/helpers/file-helpers";
+import FileHelpers from "../../../common/helpers/file-helpers";
 import { NotificationType } from "../../../common/notification-type";
 import { getFolderPath } from "../../dialogs";
 import { showNotification } from "../../notifications";

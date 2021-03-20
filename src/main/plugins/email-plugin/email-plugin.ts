@@ -5,7 +5,7 @@ import { TranslationSet } from "../../../common/translation/translation-set";
 import { PluginType } from "../../plugin-type";
 import { EmailOptions } from "../../../common/config/email-options";
 import { defaultEmailIcon } from "../../../common/icon/default-icons";
-import { isValidEmailAddress } from "../../../common/helpers/email-helpers";
+import isValidEmailAddress from "../../../common/helpers/email-helpers";
 
 export class EmailPlugin implements ExecutionPlugin {
     public readonly pluginType = PluginType.Email;

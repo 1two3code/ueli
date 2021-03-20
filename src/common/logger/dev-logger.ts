@@ -1,6 +1,6 @@
 import { Logger } from "./logger";
 import Winston from "winston";
-import { logFormat } from "../helpers/logger-helpers";
+import logFormat from "../helpers/logger-helpers";
 
 export class DevLogger implements Logger {
     private readonly logger: Winston.Logger;

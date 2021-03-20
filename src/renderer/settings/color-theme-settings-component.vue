@@ -404,11 +404,11 @@ import { defaultColorThemeOptions } from "../../common/config/color-theme-option
 import { GeneralSettings } from "./general-settings";
 import { getFolderPath, getFilePath } from "../dialogs";
 import { join } from "path";
-import { FileHelpers } from "../../common/helpers/file-helpers";
+import FileHelpers from "../../common/helpers/file-helpers";
 import { TranslationSet } from "../../common/translation/translation-set";
 import { NotificationType } from "../../common/notification-type";
 import { ColorThemeOptions } from "../../common/config/color-theme-options";
-import { isValidColorTheme } from "../../common/helpers/color-theme-helpers";
+import isValidColorTheme from "../../common/helpers/color-theme-helpers";
 import { showNotification } from "../notifications";
 import { colorThemes } from "../color-themes/color-themes";
 import { UserConfirmationDialogParams, UserConfirmationDialogType } from "./modals/user-confirmation-dialog-params";

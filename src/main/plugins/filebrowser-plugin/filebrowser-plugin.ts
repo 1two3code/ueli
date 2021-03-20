@@ -4,7 +4,7 @@ import { SearchResultItem } from "../../../common/search-result-item";
 import { UserConfigOptions } from "../../../common/config/user-config-options";
 import { TranslationSet } from "../../../common/translation/translation-set";
 import { FileBrowserOptions } from "../../../common/config/filebrowser-options";
-import { FileHelpers } from "../../../common/helpers/file-helpers";
+import FileHelpers from "../../../common/helpers/file-helpers";
 import { basename, dirname, sep } from "path";
 import { existsSync } from "fs";
 import { FileIconDataResult } from "../../../common/icon/generate-file-icon";

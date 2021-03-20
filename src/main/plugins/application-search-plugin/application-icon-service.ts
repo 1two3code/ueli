@@ -1,6 +1,6 @@
 import { Application } from "./application";
 import { applicationIconLocation, getApplicationIconFilePath } from "./application-icon-helpers";
-import { FileHelpers } from "../../../common/helpers/file-helpers";
+import FileHelpers from "../../../common/helpers/file-helpers";
 import { Logger } from "../../../common/logger/logger";
 
 export class ApplicationIconService {
