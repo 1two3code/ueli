@@ -1,7 +1,7 @@
 export interface OperatingSystemCommandsOptions {
-    isEnabled: boolean;
+  isEnabled: boolean;
 }
 
 export const defaultOperatingSystemCommandsOptions: OperatingSystemCommandsOptions = {
-    isEnabled: false,
+  isEnabled: false
 };

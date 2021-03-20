@@ -19,7 +19,7 @@ import {
   UserConfigOptions,
   defaultUserConfigOptions
 } from "../common/config/user-config-options";
-import { ElectronStoreConfigRepository } from "../common/config/electron-store-config-repository";
+import ElectronStoreConfigRepository from "../common/config/electron-store-config-repository";
 
 import { AppearanceOptions } from "../common/config/appearance-options";
 import { isDev } from "../common/is-dev";
@@ -725,7 +725,7 @@ function updateConfig(
         })
         .catch(err => logger.error(err));
     })
-    .catch(err => logger.error(err));
+    .catch((err: any) => logger.error(err));
 }
 
 function createMainWindow() {

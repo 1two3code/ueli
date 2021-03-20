@@ -1,7 +1,7 @@
 export interface EmailOptions {
-    isEnabled: boolean;
+  isEnabled: boolean;
 }
 
 export const defaultEmailOptions: EmailOptions = {
-    isEnabled: true,
+  isEnabled: true
 };

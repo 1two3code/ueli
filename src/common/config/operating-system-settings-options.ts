@@ -1,7 +1,7 @@
 export interface OperatingSystemSettingsOptions {
-    isEnabled: boolean;
+  isEnabled: boolean;
 }
 
 export const defaultOperatingSystemSettingsOptions: OperatingSystemSettingsOptions = {
-    isEnabled: false,
+  isEnabled: false
 };

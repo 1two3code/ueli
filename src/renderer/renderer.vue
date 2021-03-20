@@ -11,7 +11,7 @@ import {
   defaultUserConfigOptions
 } from "../common/config/user-config-options";
 
-import { ElectronStoreConfigRepository } from "../common/config/electron-store-config-repository";
+import ElectronStoreConfigRepository from "../common/config/electron-store-config-repository";
 import { UpdateCheckResult } from "../common/update-check-result";
 import { GeneralOptions } from "../common/config/general-options";
 import { ColorThemeOptions } from "../common/config/color-theme-options";

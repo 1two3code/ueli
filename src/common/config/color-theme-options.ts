@@ -1,22 +1,22 @@
 import { atomOneDark } from "../../renderer/color-themes/color-themes";
 
 export interface ColorThemeOptions {
-    name: string;
+  name: string;
 
-    userInputBackgroundColor: string;
-    userInputTextColor: string;
+  userInputBackgroundColor: string;
+  userInputTextColor: string;
 
-    searchResultsBackgroundColor: string;
+  searchResultsBackgroundColor: string;
 
-    searchResultsItemActiveBackgroundColor: string;
-    searchResultsItemActiveTextColor: string;
-    searchResultsItemActiveDescriptionColor: string;
+  searchResultsItemActiveBackgroundColor: string;
+  searchResultsItemActiveTextColor: string;
+  searchResultsItemActiveDescriptionColor: string;
 
-    searchResultsItemNameTextcolor: string;
-    searchResultsItemDescriptionTextColor: string;
+  searchResultsItemNameTextcolor: string;
+  searchResultsItemDescriptionTextColor: string;
 
-    scrollbarForegroundColor: string;
-    scrollbarBackgroundColor: string;
+  scrollbarForegroundColor: string;
+  scrollbarBackgroundColor: string;
 }
 
 export const defaultColorThemeOptions = atomOneDark;

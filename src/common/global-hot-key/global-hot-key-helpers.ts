@@ -1,6 +1,6 @@
 import { GlobalHotKey } from "./global-hot-key";
-import { GlobalHotKeyKey } from "./global-hot-key-key";
-import { GlobalHotKeyModifier } from "./global-hot-key-modifier";
+import GlobalHotKeyKey from "./global-hot-key-key";
+import GlobalHotKeyModifier from "./global-hot-key-modifier";
 
 export default function isValidHotKey(hotKey: GlobalHotKey) {
   return (

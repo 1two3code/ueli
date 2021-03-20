@@ -1,7 +1,7 @@
 export interface UwpSearchOptions {
-    isEnabled: boolean;
+  isEnabled: boolean;
 }
 
 export const defaultUwpSearchOptions: UwpSearchOptions = {
-    isEnabled: true,
+  isEnabled: true
 };
