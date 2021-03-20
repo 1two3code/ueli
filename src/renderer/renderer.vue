@@ -1,3 +1,4 @@
+<script lang="ts">
 import Vue from "vue";
 import { ipcRenderer } from "electron";
 import { Chrome } from "vue-color";
@@ -262,3 +263,4 @@ const app = new Vue({
 document.onkeydown = (event: KeyboardEvent) => {
     app.mainWindowGlobalKeyPress(event);
 };
+</script>

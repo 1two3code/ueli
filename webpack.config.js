@@ -30,9 +30,9 @@ const mainConfig = {
 }
 
 const rendererConfig = {
-    entry: path.join(__dirname, "src", "renderer", "renderer.ts"),
+    entry: path.join(__dirname, "src", "renderer", "renderer.vue"),
     output: {
-        filename: "renderer.js",
+        filename: "renderer.vue",
         path: path.join(__dirname, "bundle"),
         devtoolModuleFilenameTemplate: info => {
             if (info.allLoaders === '') {
