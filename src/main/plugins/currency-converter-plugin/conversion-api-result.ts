@@ -1,9 +1,9 @@
 export interface ConversionRate {
-    [key: string]: number;
+  [key: string]: number;
 }
 
 export interface ConversionApiResult {
-    base: string;
-    date: string;
-    rates: ConversionRate;
+  base: string;
+  date: string;
+  rates: ConversionRate;
 }

@@ -1,10 +1,8 @@
 ## refactoring
 - Two spaces...
 - use eslint over tslint
-- .vue over .tsx for components
 - styling in scoped tags
 - vue3 https://johnpapa.net/vue2-to-vue3/
-- fucking ctrl click .vue files in ts... wtf
 
 
 ##

@@ -1,5 +1,4 @@
 <script lang="ts">
-/* eslint-disable import/no-extraneous-dependencies */
 import Vue from "vue";
 import Electron, { ipcRenderer } from "electron";
 import { Chrome } from "vue-color";
