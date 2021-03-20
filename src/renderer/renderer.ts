@@ -37,7 +37,7 @@ import { Chrome } from "vue-color";
 import { fileBrowserSettingsComponent } from "./settings/filebrowser-settings-component";
 import { operatingSystemCommandsSettingsComponent } from "./settings/operating-system-commands-settings-component";
 import { calculatorSettingsComponent } from "./settings/calculator-settings-component";
-import { urlSettingsComponent } from "./settings/url-settings-component";
+import urlSettingsComponent from "./settings/url-settings-component.vue";
 import { emailSettingsComponent } from "./settings/email-settings-component";
 import { NotificationType } from "../common/notification-type";
 import { currencyConverterSettingsComponent } from "./settings/currency-converter-settings-component";
