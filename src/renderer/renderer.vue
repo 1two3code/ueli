@@ -1,13 +1,17 @@
 <script lang="ts">
+/* eslint-disable import/no-extraneous-dependencies */
 import Vue from "vue";
-import { ipcRenderer } from "electron";
+import Electron, { ipcRenderer } from "electron";
 import { Chrome } from "vue-color";
 import { VueEventChannels } from "./vue-event-channels";
 import { vueEventDispatcher } from "./vue-event-dispatcher";
 import { IpcChannels } from "../common/ipc-channels";
 import { SearchResultItem } from "../common/search-result-item";
-import { UserConfigOptions } from "../common/config/user-config-options";
-import { defaultUserConfigOptions } from "../common/config/user-config-options";
+import {
+  UserConfigOptions,
+  defaultUserConfigOptions
+} from "../common/config/user-config-options";
+
 import { ElectronStoreConfigRepository } from "../common/config/electron-store-config-repository";
 import { UpdateCheckResult } from "../common/update-check-result";
 import { GeneralOptions } from "../common/config/general-options";
@@ -19,7 +23,6 @@ import { pluginToggle } from "./settings/elements/plugin-toggle";
 import { deepCopy } from "../common/helpers/object-helpers";
 import { PluginType } from "../main/plugin-type";
 import { TranslationSet } from "../common/translation/translation-set";
-
 
 import userInputComponent from "./user-input-component.vue";
 import searchResultsComponent from "./search-results-component.vue";
@@ -71,15 +74,24 @@ Vue.component("settings", settingsComponent);
 Vue.component("general-settings", generalSettingsComponent);
 Vue.component("appearance-settings", appearanceSettingsComponent);
 Vue.component("search-engine-settings", searchEngineSettingsComponent);
-Vue.component("application-search-settings", applicationSearchSettingsComponent);
+Vue.component(
+  "application-search-settings",
+  applicationSearchSettingsComponent
+);
 Vue.component("setting-menu-item", settingMenuItemComponent);
 Vue.component("settings-loading-overlay", settingsLoadingOverlayComponent);
 Vue.component("user-styles", userStylesComponent);
 Vue.component("shortcut-settings", shortcutSettingsComponent);
 Vue.component("shortcut-editing-modal", shortcutEditingModal);
 Vue.component("tags-editing", tagsEditingComponent);
-Vue.component("new-application-folder-modal", newApplicationFolderModalComponent);
-Vue.component("new-application-file-extension-modal", newApplicationFileExtensionModalComponent);
+Vue.component(
+  "new-application-folder-modal",
+  newApplicationFolderModalComponent
+);
+Vue.component(
+  "new-application-file-extension-modal",
+  newApplicationFileExtensionModalComponent
+);
 Vue.component("mdfind-settings", mdfindSettingsComponent);
 Vue.component("everthing-settings", everythingSettingsComponent);
 Vue.component("translation-settings", translationSettingsComponent);
@@ -91,18 +103,33 @@ Vue.component("color-theme-settings", colorThemeSettingsComponent);
 Vue.component("chrome-picker", Chrome);
 Vue.component("color-picker", colorPickerComponent);
 Vue.component("filebrowser-settings", fileBrowserSettingsComponent);
-Vue.component("operating-system-commands-settings", operatingSystemCommandsSettingsComponent);
-Vue.component("operating-system-settings-settings", operatingSystemSettingsSettingsComponent);
+Vue.component(
+  "operating-system-commands-settings",
+  operatingSystemCommandsSettingsComponent
+);
+Vue.component(
+  "operating-system-settings-settings",
+  operatingSystemSettingsSettingsComponent
+);
 Vue.component("calculator-settings", calculatorSettingsComponent);
 Vue.component("dictionary-settings", dictionarySettingsComponent);
 Vue.component("url-settings", urlSettingsComponent);
 Vue.component("email-settings", emailSettingsComponent);
-Vue.component("currency-converter-settings", currencyConverterSettingsComponent);
+Vue.component(
+  "currency-converter-settings",
+  currencyConverterSettingsComponent
+);
 Vue.component("workflow-settings", workflowSettingsComponent);
 Vue.component("workflow-editing-modal", workflowEditingModal);
 Vue.component("commandline-settings", commandlineSettingsComponent);
-Vue.component("simple-folder-search-settings", simpleFolderSearchSettingsComponent);
-Vue.component("simple-folder-search-editing", simpleFolderSearchEditingModalComponent);
+Vue.component(
+  "simple-folder-search-settings",
+  simpleFolderSearchSettingsComponent
+);
+Vue.component(
+  "simple-folder-search-editing",
+  simpleFolderSearchEditingModalComponent
+);
 Vue.component("user-confirmation", userConfirmationDialog);
 Vue.component("uwp-settings", uwpSettingsComponent);
 Vue.component("color-converter-setttings", colorConverterSettingsComponent);
@@ -110,157 +137,268 @@ Vue.component("plugin-toggle", pluginToggle);
 Vue.component("browser-bookmark-settings", browserBookmarkSettingsComponent);
 Vue.component("control-panel-settings", controlPanelSettingsComponent);
 
-const initialConfig = new ElectronStoreConfigRepository(deepCopy(defaultUserConfigOptions)).getConfig();
+const initialConfig = new ElectronStoreConfigRepository(
+  deepCopy(defaultUserConfigOptions)
+).getConfig();
 
 const app = new Vue({
-    data: {
-        config: initialConfig,
-        translations: getTranslationSet(initialConfig.generalOptions.language),
-    },
-    el: "#app",
-    mounted() {
-        vueEventDispatcher.$on(VueEventChannels.userInputChange, (userInput: string) => {
-            ipcRenderer.send(IpcChannels.search, userInput);
-        });
+  data: {
+    config: initialConfig,
+    translations: getTranslationSet(initialConfig.generalOptions.language)
+  },
+  el: "#app",
+  mounted() {
+    vueEventDispatcher.$on(
+      VueEventChannels.userInputChange,
+      (userInput: string) => {
+        ipcRenderer.send(IpcChannels.search, userInput);
+      }
+    );
 
-        vueEventDispatcher.$on(VueEventChannels.handleExecution, (userInput: string, searchResultIem: SearchResultItem | undefined, privileged: boolean) => {
-            if (searchResultIem !== undefined) {
-                ipcRenderer.send(IpcChannels.execute, userInput, searchResultIem, privileged);
-            }
-        });
+    vueEventDispatcher.$on(
+      VueEventChannels.handleExecution,
+      (
+        userInput: string,
+        searchResultIem: SearchResultItem | undefined,
+        privileged: boolean
+      ) => {
+        if (searchResultIem !== undefined) {
+          ipcRenderer.send(
+            IpcChannels.execute,
+            userInput,
+            searchResultIem,
+            privileged
+          );
+        }
+      }
+    );
 
-        vueEventDispatcher.$on(VueEventChannels.handleOpenLocation, (searchResultItem: SearchResultItem | undefined) => {
-            if (searchResultItem !== undefined) {
-                ipcRenderer.send(IpcChannels.openSearchResultLocation, searchResultItem);
-            }
-        });
+    vueEventDispatcher.$on(
+      VueEventChannels.handleOpenLocation,
+      (searchResultItem: SearchResultItem | undefined) => {
+        if (searchResultItem !== undefined) {
+          ipcRenderer.send(
+            IpcChannels.openSearchResultLocation,
+            searchResultItem
+          );
+        }
+      }
+    );
 
-        vueEventDispatcher.$on(VueEventChannels.handleAutoCompletion, (searchResultItem: SearchResultItem | undefined) => {
-            if (searchResultItem !== undefined) {
-                ipcRenderer.send(IpcChannels.autoComplete, searchResultItem);
-            }
-        });
+    vueEventDispatcher.$on(
+      VueEventChannels.handleAutoCompletion,
+      (searchResultItem: SearchResultItem | undefined) => {
+        if (searchResultItem !== undefined) {
+          ipcRenderer.send(IpcChannels.autoComplete, searchResultItem);
+        }
+      }
+    );
 
-        vueEventDispatcher.$on(VueEventChannels.favoritesRequested, () => {
-            ipcRenderer.send(IpcChannels.favoritesRequested);
-        });
+    vueEventDispatcher.$on(VueEventChannels.favoritesRequested, () => {
+      ipcRenderer.send(IpcChannels.favoritesRequested);
+    });
 
-        vueEventDispatcher.$on(VueEventChannels.configUpdated, (updatedConfig: UserConfigOptions, needsIndexRefresh?: boolean, pluginType?: PluginType) => {
-            if (needsIndexRefresh) {
-                vueEventDispatcher.$emit(VueEventChannels.refreshIndexesStarted);
-            }
+    vueEventDispatcher.$on(
+      VueEventChannels.configUpdated,
+      (
+        updatedConfig: UserConfigOptions,
+        needsIndexRefresh?: boolean,
+        pluginType?: PluginType
+      ) => {
+        if (needsIndexRefresh) {
+          vueEventDispatcher.$emit(VueEventChannels.refreshIndexesStarted);
+        }
 
-            this.translations = getTranslationSet(updatedConfig.generalOptions.language);
-            this.config = updatedConfig;
-            ipcRenderer.send(IpcChannels.configUpdated, updatedConfig, needsIndexRefresh, pluginType);
-        });
+        this.translations = getTranslationSet(
+          updatedConfig.generalOptions.language
+        );
+        this.config = updatedConfig;
+        ipcRenderer.send(
+          IpcChannels.configUpdated,
+          updatedConfig,
+          needsIndexRefresh,
+          pluginType
+        );
+      }
+    );
 
-        vueEventDispatcher.$on(VueEventChannels.clearExecutionLogConfirmed, () => {
-            ipcRenderer.send(IpcChannels.clearExecutionLogConfirmed);
-        });
+    vueEventDispatcher.$on(VueEventChannels.clearExecutionLogConfirmed, () => {
+      ipcRenderer.send(IpcChannels.clearExecutionLogConfirmed);
+    });
 
-        vueEventDispatcher.$on(VueEventChannels.openDebugLogRequested, () => {
-            ipcRenderer.send(IpcChannels.openDebugLogRequested);
-        });
+    vueEventDispatcher.$on(VueEventChannels.openDebugLogRequested, () => {
+      ipcRenderer.send(IpcChannels.openDebugLogRequested);
+    });
 
-        vueEventDispatcher.$on(VueEventChannels.openTempFolderRequested, () => {
-            ipcRenderer.send(IpcChannels.openTempFolderRequested);
-        });
+    vueEventDispatcher.$on(VueEventChannels.openTempFolderRequested, () => {
+      ipcRenderer.send(IpcChannels.openTempFolderRequested);
+    });
 
-        vueEventDispatcher.$on(VueEventChannels.selectInputHistoryItem, (direction: string) => {
-            ipcRenderer.send(IpcChannels.selectInputHistoryItem, direction);
-        });
+    vueEventDispatcher.$on(
+      VueEventChannels.selectInputHistoryItem,
+      (direction: string) => {
+        ipcRenderer.send(IpcChannels.selectInputHistoryItem, direction);
+      }
+    );
 
-        vueEventDispatcher.$on(VueEventChannels.checkForUpdate, () => {
-            ipcRenderer.send(IpcChannels.checkForUpdate);
-        });
+    vueEventDispatcher.$on(VueEventChannels.checkForUpdate, () => {
+      ipcRenderer.send(IpcChannels.checkForUpdate);
+    });
 
-        vueEventDispatcher.$on(VueEventChannels.downloadUpdate, () => {
-            ipcRenderer.send(IpcChannels.downloadUpdate);
-        });
+    vueEventDispatcher.$on(VueEventChannels.downloadUpdate, () => {
+      ipcRenderer.send(IpcChannels.downloadUpdate);
+    });
 
-        ipcRenderer.on(IpcChannels.executionFinished, (event) => {
-            vueEventDispatcher.$emit(VueEventChannels.executionFinished);
-        });
+    ipcRenderer.on(IpcChannels.executionFinished, event => {
+      vueEventDispatcher.$emit(VueEventChannels.executionFinished);
+    });
 
-        ipcRenderer.on(IpcChannels.appearanceOptionsUpdated, (event: Electron.Event, updatedAppearanceOptions: AppearanceOptions) => {
-            vueEventDispatcher.$emit(VueEventChannels.appearanceOptionsUpdated, updatedAppearanceOptions);
-        });
+    ipcRenderer.on(
+      IpcChannels.appearanceOptionsUpdated,
+      (event: Electron.Event, updatedAppearanceOptions: AppearanceOptions) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.appearanceOptionsUpdated,
+          updatedAppearanceOptions
+        );
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.generalOptionsUpdated, (event: Electron.Event, updatedGeneralOptions: GeneralOptions) => {
-            vueEventDispatcher.$emit(VueEventChannels.generalOptionsUpdated, updatedGeneralOptions);
-        });
+    ipcRenderer.on(
+      IpcChannels.generalOptionsUpdated,
+      (event: Electron.Event, updatedGeneralOptions: GeneralOptions) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.generalOptionsUpdated,
+          updatedGeneralOptions
+        );
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.languageUpdated, (event: Electron.Event, updatedTranslationSet: TranslationSet) => {
-            this.translations = updatedTranslationSet;
-        });
+    ipcRenderer.on(
+      IpcChannels.languageUpdated,
+      (event: Electron.Event, updatedTranslationSet: TranslationSet) => {
+        this.translations = updatedTranslationSet;
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.colorThemeOptionsUpdated, (event: Electron.Event, updatedColorThemeOptions: ColorThemeOptions) => {
-            vueEventDispatcher.$emit(VueEventChannels.colorThemeOptionsUpdated, updatedColorThemeOptions);
-        });
+    ipcRenderer.on(
+      IpcChannels.colorThemeOptionsUpdated,
+      (event: Electron.Event, updatedColorThemeOptions: ColorThemeOptions) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.colorThemeOptionsUpdated,
+          updatedColorThemeOptions
+        );
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.searchResponse, (event: Electron.Event, searchResults: SearchResultItem[]) => {
-            vueEventDispatcher.$emit(VueEventChannels.searchResultsUpdated, searchResults);
-        });
+    ipcRenderer.on(
+      IpcChannels.searchResponse,
+      (event: Electron.Event, searchResults: SearchResultItem[]) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.searchResultsUpdated,
+          searchResults
+        );
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.favoritesReponse, (event: Electron.Event, searchResults: SearchResultItem[]) => {
-            vueEventDispatcher.$emit(VueEventChannels.searchResultsUpdated, searchResults);
-        });
+    ipcRenderer.on(
+      IpcChannels.favoritesReponse,
+      (event: Electron.Event, searchResults: SearchResultItem[]) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.searchResultsUpdated,
+          searchResults
+        );
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.mainWindowHasBeenHidden, () => {
-            vueEventDispatcher.$emit(VueEventChannels.mainWindowHasBeenHidden);
-        });
+    ipcRenderer.on(IpcChannels.mainWindowHasBeenHidden, () => {
+      vueEventDispatcher.$emit(VueEventChannels.mainWindowHasBeenHidden);
+    });
 
-        ipcRenderer.on(IpcChannels.mainWindowHasBeenShown, () => {
-            vueEventDispatcher.$emit(VueEventChannels.mainWindowHasBeenShown);
-        });
+    ipcRenderer.on(IpcChannels.mainWindowHasBeenShown, () => {
+      vueEventDispatcher.$emit(VueEventChannels.mainWindowHasBeenShown);
+    });
 
-        ipcRenderer.on(IpcChannels.userInputUpdated, (event: Electron.Event, updatedUserInput: string, selectText?: boolean) => {
-            vueEventDispatcher.$emit(VueEventChannels.userInputUpdated, updatedUserInput, selectText);
-        });
+    ipcRenderer.on(
+      IpcChannels.userInputUpdated,
+      (
+        event: Electron.Event,
+        updatedUserInput: string,
+        selectText?: boolean
+      ) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.userInputUpdated,
+          updatedUserInput,
+          selectText
+        );
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.notification, (event: Electron.Event, message: string, type?: NotificationType) => {
-            vueEventDispatcher.$emit(VueEventChannels.notification, message, type);
-        });
+    ipcRenderer.on(
+      IpcChannels.notification,
+      (event: Electron.Event, message: string, type?: NotificationType) => {
+        vueEventDispatcher.$emit(VueEventChannels.notification, message, type);
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.refreshIndexesStarted, (event: Electron.Event) => {
-            vueEventDispatcher.$emit(VueEventChannels.refreshIndexesStarted);
-        });
+    ipcRenderer.on(
+      IpcChannels.refreshIndexesStarted,
+      (event: Electron.Event) => {
+        vueEventDispatcher.$emit(VueEventChannels.refreshIndexesStarted);
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.refreshIndexesCompleted, (event: Electron.Event, message: string) => {
-            vueEventDispatcher.$emit(VueEventChannels.refreshIndexesFinished);
-        });
+    ipcRenderer.on(
+      IpcChannels.refreshIndexesCompleted,
+      (event: Electron.Event, message: string) => {
+        vueEventDispatcher.$emit(VueEventChannels.refreshIndexesFinished);
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.checkForUpdateResponse, (event: Electron.Event, updateCheckResult: UpdateCheckResult) => {
-            vueEventDispatcher.$emit(VueEventChannels.checkForUpdateResponse, updateCheckResult);
-        });
+    ipcRenderer.on(
+      IpcChannels.checkForUpdateResponse,
+      (event: Electron.Event, updateCheckResult: UpdateCheckResult) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.checkForUpdateResponse,
+          updateCheckResult
+        );
+      }
+    );
 
-        ipcRenderer.on(IpcChannels.autoCompleteResponse, (event: Electron.Event, updatedUserInput: string) => {
-            vueEventDispatcher.$emit(VueEventChannels.autoCompletionResponse, updatedUserInput);
-        });
-    },
-    methods: {
-        mainWindowGlobalKeyPress(event: KeyboardEvent) {
-            if ((event.ctrlKey && event.key.toLowerCase() === "i") || (event.metaKey && event.key === ",")) {
-                ipcRenderer.send(IpcChannels.openSettingsWindow);
-            }
+    ipcRenderer.on(
+      IpcChannels.autoCompleteResponse,
+      (event: Electron.Event, updatedUserInput: string) => {
+        vueEventDispatcher.$emit(
+          VueEventChannels.autoCompletionResponse,
+          updatedUserInput
+        );
+      }
+    );
+  },
+  methods: {
+    mainWindowGlobalKeyPress(event: KeyboardEvent) {
+      if (
+        (event.ctrlKey && event.key.toLowerCase() === "i") ||
+        (event.metaKey && event.key === ",")
+      ) {
+        ipcRenderer.send(IpcChannels.openSettingsWindow);
+      }
 
-            if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "l") {
-                vueEventDispatcher.$emit(VueEventChannels.focusOnInput);
-            }
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "l") {
+        vueEventDispatcher.$emit(VueEventChannels.focusOnInput);
+      }
 
-            if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "r") {
-                ipcRenderer.send(IpcChannels.reloadApp);
-            }
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "r") {
+        ipcRenderer.send(IpcChannels.reloadApp);
+      }
 
-            if (event.key === "Escape") {
-                ipcRenderer.send(IpcChannels.mainWindowHideRequested);
-            }
-        },
-    },
+      if (event.key === "Escape") {
+        ipcRenderer.send(IpcChannels.mainWindowHideRequested);
+      }
+    }
+  }
 });
 
 document.onkeydown = (event: KeyboardEvent) => {
-    app.mainWindowGlobalKeyPress(event);
+  app.mainWindowGlobalKeyPress(event);
 };
 </script>
