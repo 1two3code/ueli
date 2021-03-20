@@ -4,7 +4,7 @@ import Electron, { ipcRenderer } from "electron";
 import { Chrome } from "vue-color";
 import { VueEventChannels } from "./vue-event-channels";
 import { vueEventDispatcher } from "./vue-event-dispatcher";
-import { IpcChannels } from "../common/ipc-channels";
+import IpcChannels from "../common/ipc-channels";
 import { SearchResultItem } from "../common/search-result-item";
 import {
   UserConfigOptions,
@@ -12,11 +12,11 @@ import {
 } from "../common/config/user-config-options";
 
 import ElectronStoreConfigRepository from "../common/config/electron-store-config-repository";
-import { UpdateCheckResult } from "../common/update-check-result";
+import UpdateCheckResult from "../common/update-check-result";
 import { GeneralOptions } from "../common/config/general-options";
 import { ColorThemeOptions } from "../common/config/color-theme-options";
-import { NotificationType } from "../common/notification-type";
-import { getTranslationSet } from "../common/translation/translation-set-manager";
+import NotificationType from "../common/notification-type";
+import getTranslationSet from "../common/translation/translation-set-manager";
 import { AppearanceOptions } from "../common/config/appearance-options";
 import { pluginToggle } from "./settings/elements/plugin-toggle";
 import { deepCopy } from "../common/helpers/object-helpers";

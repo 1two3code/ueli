@@ -151,7 +151,7 @@ import Vue from "vue";
 import { platform } from "os";
 import { vueEventDispatcher } from "../vue-event-dispatcher";
 import { VueEventChannels } from "../vue-event-channels";
-import { NotificationType } from "../../common/notification-type";
+import NotificationType from "../../common/notification-type";
 import { PluginSettings } from "./plugin-settings";
 import { SettingOsSpecific } from "./settings-os-specific";
 import { GeneralSettings } from "./general-settings";

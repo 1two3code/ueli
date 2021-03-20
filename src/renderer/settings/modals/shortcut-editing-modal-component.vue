@@ -107,7 +107,7 @@ import { Shortcut } from "../../../main/plugins/shortcuts-search-plugin/shortcut
 import { ShortcutType } from "../../../main/plugins/shortcuts-search-plugin/shortcut-type";
 import { platform, homedir } from "os";
 import { defaultNewShortcut, isValidShortcutToAdd } from "../../../main/plugins/shortcuts-search-plugin/shortcut-helpers";
-import { NotificationType } from "../../../common/notification-type";
+import NotificationType from "../../../common/notification-type";
 import { isValidWindowsFilePath, isValidMacOsFilePath } from "../../../common/helpers/file-path-validators";
 import { getCurrentOperatingSystem } from "../../../common/helpers/operating-system-helpers";
 import { showNotification } from "../../notifications";

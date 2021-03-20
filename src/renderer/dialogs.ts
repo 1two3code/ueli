@@ -1,5 +1,5 @@
 import { ipcRenderer } from "electron";
-import { IpcChannels } from "../common/ipc-channels";
+import IpcChannels from "../common/ipc-channels";
 
 export function getFolderPath(): Promise<string> {
     return new Promise((resolve, reject) => {

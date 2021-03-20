@@ -1,6 +1,6 @@
 import { SearchEngine } from "./search-engine";
 import { SearchPlugin } from "./search-plugin";
-import { englishTranslationSet } from "../common/translation/english-translation-set";
+import englishTranslationSet from "../common/translation/english-translation-set";
 import { FakeSearchPlugin } from "../tests/fake-search-plugin";
 import { FakeExecutionPlugin } from "../tests/fake-execution-plugin";
 import { SearchResultItem } from "../common/search-result-item";

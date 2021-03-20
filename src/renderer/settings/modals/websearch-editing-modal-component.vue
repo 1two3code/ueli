@@ -114,7 +114,7 @@ import { VueEventChannels } from "../../vue-event-channels";
 import { WebSearchEngine } from "../../../main/plugins/websearch-plugin/web-search-engine";
 import { defaultNewWebSearchEngine, isValidWebSearchEngineToAdd } from "../../../main/plugins/websearch-plugin/web-search-helpers";
 import { TranslationSet } from "../../../common/translation/translation-set";
-import { NotificationType } from "../../../common/notification-type";
+import NotificationType from "../../../common/notification-type";
 import { ModalEditMode } from "./modal-edit-mode";
 import { isEqual, deepCopy } from "../../../common/helpers/object-helpers";
 

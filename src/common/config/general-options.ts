@@ -1,4 +1,4 @@
-import { Language } from "../translation/language";
+import Language from "../translation/language";
 import { GlobalHotKey } from "../global-hot-key/global-hot-key";
 import GlobalHotKeyKey from "../global-hot-key/global-hot-key-key";
 import GlobalHotKeyModifier from "../global-hot-key/global-hot-key-modifier";

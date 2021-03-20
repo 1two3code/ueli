@@ -6,7 +6,7 @@ import { UeliCommand } from "./ueli-command";
 import IconType from "../../../common/icon/icon-type";
 import { UeliCommandExecutionArgument } from "./ueli-command-execution-argument";
 import { ipcMain } from "electron";
-import { IpcChannels } from "../../../common/ipc-channels";
+import IpcChannels from "../../../common/ipc-channels";
 import { TranslationSet } from "../../../common/translation/translation-set";
 
 export class UeliCommandSearchPlugin implements SearchPlugin {

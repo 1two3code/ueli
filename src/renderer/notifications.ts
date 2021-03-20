@@ -1,4 +1,4 @@
-import { NotificationType } from "../common/notification-type";
+import NotificationType from "../common/notification-type";
 import { vueEventDispatcher } from "./vue-event-dispatcher";
 import { VueEventChannels } from "./vue-event-channels";
 

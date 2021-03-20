@@ -48,7 +48,7 @@ import Vue from "vue";
 import { vueEventDispatcher } from "../../vue-event-dispatcher";
 import { VueEventChannels } from "../../vue-event-channels";
 import { showNotification } from "../../notifications";
-import { NotificationType } from "../../../common/notification-type";
+import NotificationType from "../../../common/notification-type";
 import { getCurrentOperatingSystem } from "../../../common/helpers/operating-system-helpers";
 import { platform } from "os";
 import { TranslationSet } from "../../../common/translation/translation-set";

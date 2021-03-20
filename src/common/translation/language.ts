@@ -1,10 +1,12 @@
-export enum Language {
-    English = "English",
-    German = "Deutsch",
-    Portuguese = "Português",
-    Russian = "Русский",
-    Czech = "Česky",
-    Turkish = "Türkçe",
-    Spanish = "Español",
-    Chinese = "简体中文"
+// eslint-disable-next-line no-shadow
+enum Language {
+  English = "English",
+  German = "Deutsch",
+  Portuguese = "Português",
+  Russian = "Русский",
+  Czech = "Česky",
+  Turkish = "Türkçe",
+  Spanish = "Español",
+  Chinese = "简体中文"
 }
+export default Language;

@@ -127,7 +127,7 @@ import { UserConfigOptions } from "../../common/config/user-config-options";
 import { VueEventChannels } from "../vue-event-channels";
 import { vueEventDispatcher } from "../vue-event-dispatcher";
 import { PluginSettings } from "./plugin-settings";
-import { NotificationType } from "../../common/notification-type";
+import NotificationType from "../../common/notification-type";
 import { showNotification } from "../notifications";
 import { UserConfirmationDialogParams, UserConfirmationDialogType } from "./modals/user-confirmation-dialog-params";
 import { TranslationSet } from "../../common/translation/translation-set";

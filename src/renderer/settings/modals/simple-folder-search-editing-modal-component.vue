@@ -82,7 +82,7 @@ import { vueEventDispatcher } from "../../vue-event-dispatcher";
 import { VueEventChannels } from "../../vue-event-channels";
 import { SimpleFolderSearchOptions, SimpleFolderSearchFolderOption } from "../../../common/config/simple-folder-search-options";
 import { ModalEditMode } from "./modal-edit-mode";
-import { NotificationType } from "../../../common/notification-type";
+import NotificationType from "../../../common/notification-type";
 import { existsSync, lstatSync } from "fs";
 import { getFolderPath } from "../../dialogs";
 import { TranslationSet } from "../../../common/translation/translation-set";

@@ -1,8 +1,9 @@
 import { basename } from "path";
 
-export const isDev = (processExecPath: string) => {
-    return basename(processExecPath)
-        .toLowerCase()
-        .replace(".exe", "")
-        .endsWith("electron");
+const isDev = (processExecPath: string) => {
+  return basename(processExecPath)
+    .toLowerCase()
+    .replace(".exe", "")
+    .endsWith("electron");
 };
+export default isDev;

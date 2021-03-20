@@ -13,7 +13,7 @@ import {
 import { autoUpdater } from "electron-updater";
 import { join } from "path";
 import { platform, release } from "os";
-import { IpcChannels } from "../common/ipc-channels";
+import IpcChannels from "../common/ipc-channels";
 import { SearchResultItem } from "../common/search-result-item";
 import {
   UserConfigOptions,
@@ -22,22 +22,22 @@ import {
 import ElectronStoreConfigRepository from "../common/config/electron-store-config-repository";
 
 import { AppearanceOptions } from "../common/config/appearance-options";
-import { isDev } from "../common/is-dev";
+import isDev from "../common/is-dev";
 import { UeliCommand } from "./plugins/ueli-command-search-plugin/ueli-command";
 import { UeliCommandExecutionArgument } from "./plugins/ueli-command-search-plugin/ueli-command-execution-argument";
 import getProductionSearchEngine from "./production/production-search-engine";
 import { GlobalHotKey } from "../common/global-hot-key/global-hot-key";
 import { defaultGeneralOptions } from "../common/config/general-options";
-import { getErrorSearchResultItem } from "../common/error-search-result-item";
+import getErrorSearchResultItem from "../common/error-search-result-item";
 import FileHelpers from "../common/helpers/file-helpers";
 import { ueliTempFolder, logFilePath } from "../common/helpers/ueli-helpers";
-import { getTranslationSet } from "../common/translation/translation-set-manager";
+import getTranslationSet from "../common/translation/translation-set-manager";
 import {
   trayIconPathWindows,
   trayIconPathMacOs
 } from "./helpers/tray-icon-helpers";
 import isValidHotKey from "../common/global-hot-key/global-hot-key-helpers";
-import { NotificationType } from "../common/notification-type";
+import NotificationType from "../common/notification-type";
 import { UserInputHistoryManager } from "./user-input-history-manager";
 import {
   getCurrentOperatingSystem,
@@ -48,7 +48,7 @@ import {
   executeFilePathMacOs
 } from "./executors/file-path-executor";
 import { WindowPosition } from "../common/window-position";
-import { UpdateCheckResult } from "../common/update-check-result";
+import UpdateCheckResult from "../common/update-check-result";
 import ProductionLogger from "../common/logger/production-logger";
 import DevLogger from "../common/logger/dev-logger";
 import {

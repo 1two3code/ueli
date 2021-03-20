@@ -147,7 +147,7 @@ import { getWorkflowExecutionArgumentTypeIcon, getWorkflowExecutionArgumentTypeC
 import { WorkflowExecutionStep } from "../../../main/plugins/workflow-plugin/workflow-execution-argument";
 import { getFilePath, getFolderPath } from "../../dialogs";
 import { isValidExecutionStep, isValidWorkflow } from "../../../main/plugins/workflow-plugin/workflow-helpers";
-import { NotificationType } from "../../../common/notification-type";
+import NotificationType from "../../../common/notification-type";
 import { defaultWorkflowIcon } from "../../../common/icon/default-icons";
 import { homedir, platform } from "os";
 import { getCurrentOperatingSystem } from "../../../common/helpers/operating-system-helpers";
