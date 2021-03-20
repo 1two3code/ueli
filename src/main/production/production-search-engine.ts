@@ -69,6 +69,7 @@ export function getProductionSearchEngine(
     const filePathExecutor = operatingSystem === OperatingSystem.Windows ? executeFilePathWindows : executeFilePathMacOs;
     const filePathLocationExecutor = openFileLocation;
     const urlExecutor = openUrlInBrowser;
+    // const urlExecutor = getWebearchSuggestions;
     const commandlineExecutor = operatingSystem === OperatingSystem.Windows ? windowsCommandLineExecutor : macOsCommandLineExecutor;
     const operatingSystemSettingsRepository = operatingSystem === OperatingSystem.Windows ? new WindowsOperatingSystemSettingRepository() : new MacOsOperatingSystemSettingRepository();
     const operatingSystemSettingExecutor = operatingSystem === OperatingSystem.Windows ? executeWindowsOperatingSystemSetting : executeMacOSOperatingSystemSetting;

@@ -24,7 +24,7 @@
     "strictNullChecks": true, /* Enable strict null checks. */
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "strictPropertyInitialization": true
+    "strictPropertyInitialization": true,
     // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
     // "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
     /* Additional Checks */
@@ -34,8 +34,11 @@
     // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
     /* Module Resolution Options */
     // "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
-    // "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
-    // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+    "baseUrl": ".",                       /* Base directory to resolve non-absolute module names. */
+    "paths": {
+			"@/*": ["src/*"],
+			"@settings/*": ["src/renderer/settings*"]
+    },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */
     // "types": [],                           /* Type declaration files to be included in compilation. */
@@ -51,6 +54,7 @@
   },
   "include": [
     "./src/**/*.ts",
+    "./src/vue.d.ts",
     "./src/declarations.d.ts"
-  ],
+  ]
 }

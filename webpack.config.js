@@ -72,8 +72,18 @@ const rendererConfig = {
             {
                 test: /\.vue$/,
                 loader: "vue-loader",
-                
-              }
+            },
+            {
+              test: /\.css$/i,
+              use: ["style-loader", "css-loader"],
+            },
+            {
+              test: /\.svg$/,
+              use: [
+                'babel-loader',
+                'vue-svg-loader',
+              ],
+            },
         ],
     },
     plugins: [
