@@ -3,7 +3,7 @@ import { BrowserBookmark } from "./browser-bookmark";
 import FileHelpers from "../../../common/helpers/file-helpers";
 import isValidUrl from "../../../common/helpers/url-helpers";
 import { Browser } from "./browser";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { Icon } from "../../../common/icon/icon";
 
 export class GoogleChromeBookmarkRepository implements BrowserBookmarkRepository {

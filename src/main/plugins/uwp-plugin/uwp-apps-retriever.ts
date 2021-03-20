@@ -1,6 +1,6 @@
 import { UwpApplication } from "./uwp-application";
 import { executeCommandWithOutput } from "../../executors/command-executor";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 
 export function getAllUwpApps(alreadyKnownApps: UwpApplication[]): Promise<UwpApplication[]> {
     return new Promise((resolve, reject) => {

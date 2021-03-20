@@ -5,7 +5,7 @@ import { basename, extname } from "path";
 import { Icon } from "../../../common/icon/icon";
 import { ApplicationIconService } from "./application-icon-service";
 import { getApplicationIconFilePath } from "./application-icon-helpers";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { Logger } from "../../../common/logger/logger";
 import { OperatingSystemVersion } from "../../../common/operating-system";
 

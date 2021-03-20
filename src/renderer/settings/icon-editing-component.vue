@@ -28,7 +28,7 @@
 <script lang="ts">
 
 import Vue from "vue";
-import { IconType } from "../../common/icon/icon-type";
+import IconType from "../../common/icon/icon-type";
 import { TranslationSet } from "../../common/translation/translation-set";
 import { getIconTypeLabel } from "../../common/icon/icon-helpers";
 

@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { IconType } from "../../common/icon/icon-type";
+import IconType from "../../common/icon/icon-type";
 import { Icon } from "../../common/icon/icon";
 import { isValidIcon } from "../../common/icon/icon-helpers";
 

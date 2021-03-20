@@ -1,5 +1,5 @@
 import { Browser } from "./browser";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { Icon } from "../../../common/icon/icon";
 import { GoogleChromeBookmarkRepository } from "./google-chrome-bookmark-repository";
 

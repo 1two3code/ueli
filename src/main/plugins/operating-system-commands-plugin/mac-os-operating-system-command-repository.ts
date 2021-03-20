@@ -1,5 +1,5 @@
 import { OperatingSystemCommand } from "./operating-system-command";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { OperatingSystemCommandRepository } from "./operating-system-commands-repository";
 import { TranslationSet } from "../../../common/translation/translation-set";
 import { UserConfigOptions } from "../../../common/config/user-config-options";

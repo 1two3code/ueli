@@ -1,5 +1,5 @@
 import { WebSearchEngine } from "./web-search-engine";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { isValidIcon } from "../../../common/icon/icon-helpers";
 
 export const defaultNewWebSearchEngine: WebSearchEngine = {

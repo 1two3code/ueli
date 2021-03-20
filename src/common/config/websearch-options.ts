@@ -1,5 +1,5 @@
 import { WebSearchEngine } from "../../main/plugins/websearch-plugin/web-search-engine";
-import { IconType } from "../icon/icon-type";
+import IconType from "../icon/icon-type";
 
 export interface WebSearchOptions {
   isEnabled: boolean;

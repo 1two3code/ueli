@@ -7,7 +7,7 @@ import { TranslationSet } from "../../../common/translation/translation-set";
 import { UserConfigOptions } from "../../../common/config/user-config-options";
 import color from "color";
 import { defaultColorConverterIcon } from "../../../common/icon/default-icons";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { replaceWhitespace } from "../../../common/helpers/string-helpers";
 
 export class ColorConverterPlugin implements ExecutionPlugin {

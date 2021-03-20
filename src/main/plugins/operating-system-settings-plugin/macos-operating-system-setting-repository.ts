@@ -3,7 +3,7 @@ import { OperatingSystemSettingRepository } from "./operating-system-setting-rep
 import { TranslationSet } from "../../../common/translation/translation-set";
 import { getApplicationIconFilePath } from "../application-search-plugin/application-icon-helpers";
 import { basename, extname, normalize } from "path";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { generateMacAppIcons } from "../application-search-plugin/mac-os-app-icon-generator";
 import { executeCommandWithOutput } from "../../executors/command-executor";
 

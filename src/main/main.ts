@@ -49,8 +49,8 @@ import {
 } from "./executors/file-path-executor";
 import { WindowPosition } from "../common/window-position";
 import { UpdateCheckResult } from "../common/update-check-result";
-import { ProductionLogger } from "../common/logger/production-logger";
-import { DevLogger } from "../common/logger/dev-logger";
+import ProductionLogger from "../common/logger/production-logger";
+import DevLogger from "../common/logger/dev-logger";
 import {
   windowIconWindows,
   windowIconMacOs

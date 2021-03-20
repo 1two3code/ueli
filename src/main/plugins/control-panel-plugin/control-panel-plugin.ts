@@ -1,6 +1,6 @@
 import { SearchResultItem } from "../../../common/search-result-item";
 import { PluginType } from "../../plugin-type";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 import { TranslationSet } from "../../../common/translation/translation-set";
 import { UserConfigOptions } from "../../../common/config/user-config-options";
 import { SearchPlugin } from "../../search-plugin";

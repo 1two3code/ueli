@@ -2,7 +2,7 @@ import { OperatingSystemCommandRepository } from "./operating-system-commands-re
 import { OperatingSystemCommand } from "./operating-system-command";
 import { TranslationSet } from "../../../common/translation/translation-set";
 import { UserConfigOptions } from "../../../common/config/user-config-options";
-import { IconType } from "../../../common/icon/icon-type";
+import IconType from "../../../common/icon/icon-type";
 
 export class WindowsOperatingSystemCommandRepository implements OperatingSystemCommandRepository {
     private translationSet: TranslationSet;
