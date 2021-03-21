@@ -72,9 +72,11 @@
                       v-model="config.generalOptions.language"
                       @change="updateConfig()"
                     >
-                      <option v-for="availableLanguage in availableLanguages">{{
-                        availableLanguage
-                      }}</option>
+                      <option
+                        v-for="availableLanguage in availableLanguages"
+                        v-bind:key="availableLanguage"
+                        >{{ availableLanguage }}</option
+                      >
                     </select>
                   </div>
                 </div>
@@ -163,6 +165,7 @@
                       <option
                         v-for="globalHotKeyModifier in globalHotKeyModifiers"
                         :value="globalHotKeyModifier"
+                        v-bind:key="globalHotKeyModifier"
                       >
                         {{
                           getTranslatedGlobalHotKeyModifier(
@@ -189,6 +192,7 @@
                       <option
                         v-for="globalHotKeyKey in globalHotKeyKeys"
                         :value="globalHotKeyKey"
+                        v-bind:key="globalHotKeyKey"
                       >
                         {{ getTranslatedGlobalHotKeyKey(globalHotKeyKey) }}
                       </option>
@@ -530,8 +534,9 @@ import Vue from "vue";
 import Electron from "electron";
 import { join } from "path";
 import { platform } from "os";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
+import { TranslationSet } from "@/common/translation/translation-set";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
 import {
   UserConfigOptions,
   defaultUserConfigOptions
@@ -548,7 +553,7 @@ import {
   mergeUserConfigWithDefault
 } from "../../common/helpers/config-helpers";
 
-import { GeneralSettings } from "./general-settings";
+import GeneralSettings from "./general-settings";
 import {
   UserConfirmationDialogParams,
   UserConfirmationDialogType
@@ -604,7 +609,7 @@ export default Vue.extend({
   },
   methods: {
     clearExecutionLog() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
           vueEventDispatcher.$emit(VueEventChannels.clearExecutionLogConfirmed);
@@ -624,8 +629,8 @@ export default Vue.extend({
     exportCurrentSettings() {
       getFolderPath()
         .then((filePath: string) => {
-          const { config } = this;
-          const { translations } = this;
+          const { config }: { config: UserConfigOptions } = this;
+          const { translations }: { translations: TranslationSet } = this;
           const settingsFilePath = join(filePath, "ueli.config.json");
           FileHelpers.writeFile(
             settingsFilePath,
@@ -653,7 +658,7 @@ export default Vue.extend({
     getTranslatedGlobalHotKeyModifier(
       hotkeyModifier: GlobalHotKeyModifier
     ): string {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       switch (hotkeyModifier) {
         case GlobalHotKeyModifier.Alt:
           return translations.hotkeyModifierAlt;
@@ -672,7 +677,7 @@ export default Vue.extend({
       }
     },
     getTranslatedGlobalHotKeyKey(hotkeyKey: GlobalHotKeyKey): string {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       switch (hotkeyKey) {
         case GlobalHotKeyKey.Backspace:
           return translations.hotkeyKeyBackspace;
@@ -711,7 +716,7 @@ export default Vue.extend({
       }
     },
     importSettings() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const filter: Electron.FileFilter = {
         extensions: ["json"],
         name: translations.generalSettingsImportFileFilterJsonFiles
@@ -758,10 +763,10 @@ export default Vue.extend({
       vueEventDispatcher.$emit(VueEventChannels.openTempFolderRequested);
     },
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.generalOptions = deepCopy(defaultGeneralOptions);
           this.updateConfig();
         },
@@ -775,7 +780,7 @@ export default Vue.extend({
       );
     },
     resetAllSettingsToDefault() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
           this.config = deepCopy(defaultUserConfigOptions);
@@ -792,7 +797,7 @@ export default Vue.extend({
       );
     },
     updateConfig(needsIndexRefresh?: boolean) {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       if (config.generalOptions.rememberWindowPosition) {
         config.generalOptions.showAlwaysOnPrimaryDisplay = false;
       }

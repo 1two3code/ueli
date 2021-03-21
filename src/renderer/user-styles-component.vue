@@ -1,22 +1,28 @@
 <script lang="ts">
 import Vue from "vue";
-import { vueEventDispatcher } from "./vue-event-dispatcher";
-import { VueEventChannels } from "./vue-event-channels";
+import vueEventDispatcher from "./vue-event-dispatcher";
+import VueEventChannels from "./vue-event-channels";
 import { AppearanceOptions } from "../common/config/appearance-options";
 import { ColorThemeOptions } from "../common/config/color-theme-options";
 
 export default Vue.extend({
-    props: ["appearance", "colortheme"],
-    mounted() {
-        vueEventDispatcher.$on(VueEventChannels.appearanceOptionsUpdated, (updatedAppearanceOptions: AppearanceOptions) => {
-            this.appearance = updatedAppearanceOptions;
-        });
+  props: ["appearance", "colortheme"],
+  mounted() {
+    vueEventDispatcher.$on(
+      VueEventChannels.appearanceOptionsUpdated,
+      (updatedAppearanceOptions: AppearanceOptions) => {
+        this.appearance = updatedAppearanceOptions;
+      }
+    );
 
-        vueEventDispatcher.$on(VueEventChannels.colorThemeOptionsUpdated, (updatedColorThemeOptions: ColorThemeOptions) => {
-            this.colortheme = updatedColorThemeOptions;
-        });
-    }, 
-    template: `<style>
+    vueEventDispatcher.$on(
+      VueEventChannels.colorThemeOptionsUpdated,
+      (updatedColorThemeOptions: ColorThemeOptions) => {
+        this.colortheme = updatedColorThemeOptions;
+      }
+    );
+  },
+  template: `<style>
         :root {
             --font-family: {{ appearance.fontFamily }};
 
@@ -43,6 +49,6 @@ export default Vue.extend({
             --scrollbar--background-color: {{ colortheme.scrollbarBackgroundColor }};
             --scrollbar--border-radius: {{appearance.scrollbarBorderRadius}};
         }
-    </style>`,
+    </style>`
 });
 </script>

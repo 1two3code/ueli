@@ -55,10 +55,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
+import { UserConfigOptions } from "@/common/config/user-config-options";
+import { TranslationSet } from "@/common/translation/translation-set";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
 import { defaultCurrencyConverterOptions } from "../../common/config/currency-converter-options";
-import { PluginSettings } from "./plugin-settings";
+import PluginSettings from "./plugin-settings";
 import {
   UserConfirmationDialogParams,
   UserConfirmationDialogType
@@ -74,16 +76,16 @@ export default Vue.extend({
   },
   methods: {
     toggleEnabled() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.currencyConverterOptions.isEnabled = !config
         .currencyConverterOptions.isEnabled;
       this.updateConfig();
     },
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.currencyConverterOptions = deepCopy(
             defaultCurrencyConverterOptions
           );

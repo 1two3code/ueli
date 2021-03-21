@@ -64,6 +64,7 @@
                 href="#"
                 class="dropdown-item"
                 @click="changeColorTheme(colorTheme.name)"
+                v-bind:key="colorTheme"
               >
                 {{ colorTheme.name }}
               </a>
@@ -553,19 +554,21 @@
 <script lang="ts">
 import Vue from "vue";
 import { join } from "path";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
+import { UserConfigOptions } from "@/common/config/user-config-options";
+import { TranslationSet } from "@/common/translation/translation-set";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
 import {
   defaultColorThemeOptions,
   ColorThemeOptions
 } from "../../common/config/color-theme-options";
-import { GeneralSettings } from "./general-settings";
+import GeneralSettings from "./general-settings";
 import { getFolderPath, getFilePath } from "../dialogs";
 import FileHelpers from "../../common/helpers/file-helpers";
 import NotificationType from "../../common/notification-type";
 
 import isValidColorTheme from "../../common/helpers/color-theme-helpers";
-import { showNotification } from "../notifications";
+import showNotification from "../notifications";
 import { colorThemes } from "../color-themes/color-themes";
 import {
   UserConfirmationDialogParams,
@@ -585,10 +588,10 @@ export default Vue.extend({
   },
   methods: {
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.colorThemeOptions = deepCopy(defaultColorThemeOptions);
           this.updateConfig();
         },
@@ -602,61 +605,61 @@ export default Vue.extend({
       );
     },
     resetUserInputBackgroundColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.userInputBackgroundColor =
         defaultColorThemeOptions.userInputBackgroundColor;
       this.updateConfig();
     },
     resetUserInputTextColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.userInputTextColor =
         defaultColorThemeOptions.userInputTextColor;
       this.updateConfig();
     },
     resetSearchResultsBackgroundColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.searchResultsBackgroundColor =
         defaultColorThemeOptions.searchResultsBackgroundColor;
       this.updateConfig();
     },
     resetSearchResultsItemActiveBackgroundColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.searchResultsItemActiveBackgroundColor =
         defaultColorThemeOptions.searchResultsItemActiveBackgroundColor;
       this.updateConfig();
     },
     resetSearchResultsItemActiveTextColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.searchResultsItemActiveTextColor =
         defaultColorThemeOptions.searchResultsItemActiveTextColor;
       this.updateConfig();
     },
     resetSearchResultsItemActiveDescriptionColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.searchResultsItemActiveDescriptionColor =
         defaultColorThemeOptions.searchResultsItemActiveDescriptionColor;
       this.updateConfig();
     },
     resetSearchResultsItemNameTextColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.searchResultsItemNameTextcolor =
         defaultColorThemeOptions.searchResultsItemNameTextcolor;
       this.updateConfig();
     },
     resetSearchResultsItemDescriptionTextColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.searchResultsItemDescriptionTextColor =
         defaultColorThemeOptions.searchResultsItemDescriptionTextColor;
       this.updateConfig();
     },
     resetScrollbarForegroundColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.scrollbarForegroundColor =
         defaultColorThemeOptions.scrollbarForegroundColor;
       this.updateConfig();
     },
     resetScrollbarBackgroundColor() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.colorThemeOptions.scrollbarBackgroundColor =
         defaultColorThemeOptions.scrollbarBackgroundColor;
       this.updateConfig();
@@ -673,7 +676,7 @@ export default Vue.extend({
     changeColorTheme(name: string) {
       const colorTheme = colorThemes.find(c => c.name === name);
       if (colorTheme) {
-        const { config } = this;
+        const { config }: { config: UserConfigOptions } = this;
         config.colorThemeOptions = deepCopy(colorTheme);
         this.updateConfig();
       } else {
@@ -699,7 +702,7 @@ export default Vue.extend({
     importColorTheme() {
       getFilePath([{ extensions: ["json"], name: "JSON" }])
         .then((filePath: string) => {
-          const { translations } = this;
+          const { translations }: { translations: TranslationSet } = this;
           if (filePath) {
             FileHelpers.readFile(filePath)
               .then((fileContent: string) => {
@@ -707,7 +710,7 @@ export default Vue.extend({
                   fileContent
                 ) as ColorThemeOptions;
                 if (isValidColorTheme(colorThemeOptions)) {
-                  const { config } = this;
+                  const { config }: { config: UserConfigOptions } = this;
                   config.colorThemeOptions = {
                     ...config.colorThemeOptions,
                     ...colorThemeOptions
@@ -743,8 +746,8 @@ export default Vue.extend({
       getFolderPath()
         .then((folderPath: string) => {
           if (folderPath) {
-            const { translations } = this;
-            const { config } = this;
+            const { translations }: { translations: TranslationSet } = this;
+            const { config }: { config: UserConfigOptions } = this;
             const fileContent = JSON.stringify(config.colorThemeOptions);
             const filePath = join(folderPath, "ueli-color-theme.json");
             FileHelpers.writeFile(filePath, fileContent)

@@ -94,9 +94,11 @@
 <script lang="ts">
 import Vue from "vue";
 import { platform } from "os";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
-import { SettingOsSpecific } from "./settings-os-specific";
+import { UserConfigOptions } from "@/common/config/user-config-options";
+import { TranslationSet } from "@/common/translation/translation-set";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
+import SettingOsSpecific from "./settings-os-specific";
 import { defaultMdfindOptions } from "../../common/config/mdfind-options";
 import {
   UserConfirmationDialogParams,
@@ -113,10 +115,10 @@ export default Vue.extend({
   },
   methods: {
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.mdfindOptions = deepCopy(defaultMdfindOptions);
           this.updateConfig();
         },
@@ -130,7 +132,7 @@ export default Vue.extend({
       );
     },
     toggleEnabled() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.mdfindOptions.enabled = !config.mdfindOptions.enabled;
       this.updateConfig();
     },

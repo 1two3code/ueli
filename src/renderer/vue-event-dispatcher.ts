@@ -1,3 +1,4 @@
 import Vue from "vue";
 
-export const vueEventDispatcher = new Vue();
+const vueEventDispatcher = new Vue();
+export default vueEventDispatcher;

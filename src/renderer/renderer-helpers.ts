@@ -1,1 +1,2 @@
-export const showLoaderDelay = 350;
+const showLoaderDelay = 350;
+export default showLoaderDelay;

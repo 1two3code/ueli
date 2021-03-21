@@ -129,10 +129,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { PluginSettings } from "./plugin-settings";
+import { TranslationSet } from "@/common/translation/translation-set";
+import PluginSettings from "./plugin-settings";
 import { defaultShortcutOptions } from "../../common/config/shortcuts-options";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
 import { UserConfigOptions } from "../../common/config/user-config-options";
 import {
   defaultNewShortcut,
@@ -140,7 +141,7 @@ import {
 } from "../../main/plugins/shortcuts-search-plugin/shortcut-helpers";
 import { Shortcut } from "../../main/plugins/shortcuts-search-plugin/shortcut";
 import { ShortcutType } from "../../main/plugins/shortcuts-search-plugin/shortcut-type";
-import { ModalEditMode } from "./modals/modal-edit-mode";
+import ModalEditMode from "./modals/modal-edit-mode";
 import {
   UserConfirmationDialogParams,
   UserConfirmationDialogType
@@ -164,12 +165,12 @@ export default Vue.extend({
       );
     },
     addShortcut(shortcut: Shortcut) {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.shortcutOptions.shortcuts.push(deepCopy(shortcut));
       this.updateConfig();
     },
     deleteShortcut(id: number) {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.shortcutOptions.shortcuts.splice(id, 1);
       this.updateConfig();
     },
@@ -180,7 +181,7 @@ export default Vue.extend({
       this.updateConfig();
     },
     editShortcut(index: number): void {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       const shortcut: Shortcut = deepCopy(
         config.shortcutOptions.shortcuts[index]
       );
@@ -219,10 +220,10 @@ export default Vue.extend({
       }
     },
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.shortcutOptions = deepCopy(defaultShortcutOptions);
           this.updateConfig();
         },
@@ -236,7 +237,7 @@ export default Vue.extend({
       );
     },
     toggleEnabled() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.shortcutOptions.isEnabled = !config.shortcutOptions.isEnabled;
       this.updateConfig();
     },

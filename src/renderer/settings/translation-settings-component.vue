@@ -140,9 +140,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { PluginSettings } from "./plugin-settings";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
+import { TranslationSet } from "@/common/translation/translation-set";
+import { UserConfigOptions } from "@/common/config/user-config-options";
+import PluginSettings from "./plugin-settings";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
 import { defaultTranslationOptions } from "../../common/config/translation-options";
 import { TranslationLanguage } from "../../main/plugins/translation-plugin/translation-language";
 import {
@@ -162,10 +164,10 @@ export default Vue.extend({
   },
   methods: {
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.translationOptions = deepCopy(defaultTranslationOptions);
           this.updateConfig();
         },
@@ -179,7 +181,7 @@ export default Vue.extend({
       );
     },
     toggleEnabled() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.translationOptions.enabled = !config.translationOptions.enabled;
       this.updateConfig();
     },

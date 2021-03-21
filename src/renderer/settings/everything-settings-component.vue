@@ -135,9 +135,11 @@
 import Vue from "vue";
 import Electron from "electron";
 import { platform } from "os";
-import { SettingOsSpecific } from "./settings-os-specific";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
+import { UserConfigOptions } from "@/common/config/user-config-options";
+import { TranslationSet } from "@/common/translation/translation-set";
+import SettingOsSpecific from "./settings-os-specific";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
 import { defaultEverythingSearchOptions } from "../../common/config/everything-search-options";
 import { getFilePath } from "../dialogs";
 import {
@@ -155,16 +157,16 @@ export default Vue.extend({
   },
   methods: {
     toggleEnabled() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.everythingSearchOptions.enabled = !config.everythingSearchOptions
         .enabled;
       this.updateConfig();
     },
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.everythingSearchOptions = deepCopy(
             defaultEverythingSearchOptions
           );
@@ -180,25 +182,25 @@ export default Vue.extend({
       );
     },
     resetPathToEs() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.everythingSearchOptions.pathToEs =
         defaultEverythingSearchOptions.pathToEs;
       this.updateConfig();
     },
     resetPrefix() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.everythingSearchOptions.prefix =
         defaultEverythingSearchOptions.prefix;
       this.updateConfig();
     },
     resetMaxSearchResults() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.everythingSearchOptions.maxSearchResults =
         defaultEverythingSearchOptions.maxSearchResults;
       this.updateConfig();
     },
     selectFile() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const filters: Electron.FileFilter[] = [
         {
           extensions: ["exe"],
@@ -207,7 +209,7 @@ export default Vue.extend({
       ];
       getFilePath(filters)
         .then(filePath => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.everythingSearchOptions.pathToEs = filePath;
         })
         .catch(err => {

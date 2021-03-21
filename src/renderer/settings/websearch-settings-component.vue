@@ -126,13 +126,15 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { vueEventDispatcher } from "../vue-event-dispatcher";
-import { VueEventChannels } from "../vue-event-channels";
-import { PluginSettings } from "./plugin-settings";
+import { UserConfigOptions } from "@/common/config/user-config-options";
+import { TranslationSet } from "@/common/translation/translation-set";
+import vueEventDispatcher from "../vue-event-dispatcher";
+import VueEventChannels from "../vue-event-channels";
+import PluginSettings from "./plugin-settings";
 import { defaultWebSearchOptions } from "../../common/config/websearch-options";
 import { defaultNewWebSearchEngine } from "../../main/plugins/websearch-plugin/web-search-helpers";
 import { WebSearchEngine } from "../../main/plugins/websearch-plugin/web-search-engine";
-import { ModalEditMode } from "./modals/modal-edit-mode";
+import ModalEditMode from "./modals/modal-edit-mode";
 import { defaultWebSearchIcon } from "../../common/icon/default-icons";
 import {
   UserConfirmationDialogParams,
@@ -150,7 +152,7 @@ export default Vue.extend({
   },
   methods: {
     editWebsearchEngine(index: number) {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       const webSearchEngine = config.websearchOptions.webSearchEngines[index];
       vueEventDispatcher.$emit(
         VueEventChannels.openWebSearchEditingModal,
@@ -167,10 +169,10 @@ export default Vue.extend({
       );
     },
     resetAll() {
-      const { translations } = this;
+      const { translations }: { translations: TranslationSet } = this;
       const userConfirmationDialogParams: UserConfirmationDialogParams = {
         callback: () => {
-          const { config } = this;
+          const { config }: { config: UserConfigOptions } = this;
           config.websearchOptions = deepCopy(defaultWebSearchOptions);
           this.updateConfig();
         },
@@ -184,7 +186,7 @@ export default Vue.extend({
       );
     },
     toggleEnabled() {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.websearchOptions.isEnabled = !config.websearchOptions.isEnabled;
       this.updateConfig();
     },
@@ -192,12 +194,12 @@ export default Vue.extend({
       vueEventDispatcher.$emit(VueEventChannels.configUpdated, this.config);
     },
     addWebsearchEngine(websearchEngine: WebSearchEngine) {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.websearchOptions.webSearchEngines.push(websearchEngine);
       this.updateConfig();
     },
     updateWebsearchEngine(websearchEngine: WebSearchEngine, index: number) {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.websearchOptions.webSearchEngines[index] = deepCopy(
         websearchEngine
       );
@@ -205,7 +207,7 @@ export default Vue.extend({
       this.updateConfig();
     },
     removeWebsearchEngine(index: number) {
-      const { config } = this;
+      const { config }: { config: UserConfigOptions } = this;
       config.websearchOptions.webSearchEngines.splice(index, 1);
       this.updateConfig();
     }

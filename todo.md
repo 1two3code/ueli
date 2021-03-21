@@ -1,6 +1,8 @@
 ## refactoring
 - Two spaces...
 - use eslint over tslint
+- get typings for Vue.extends ~
+  so that "this.config" is config automatically ~
 - styling in scoped tags
 - vue3 https://johnpapa.net/vue2-to-vue3/
 - vuex (for config vue/no-mutating-pros ~)

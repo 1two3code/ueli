@@ -2,8 +2,8 @@
 import Vue from "vue";
 import Electron, { ipcRenderer } from "electron";
 import { Chrome } from "vue-color";
-import { VueEventChannels } from "./vue-event-channels";
-import { vueEventDispatcher } from "./vue-event-dispatcher";
+import VueEventChannels from "./vue-event-channels";
+import vueEventDispatcher from "./vue-event-dispatcher";
 import IpcChannels from "../common/ipc-channels";
 import { SearchResultItem } from "../common/search-result-item";
 import {
@@ -18,7 +18,7 @@ import { ColorThemeOptions } from "../common/config/color-theme-options";
 import NotificationType from "../common/notification-type";
 import getTranslationSet from "../common/translation/translation-set-manager";
 import { AppearanceOptions } from "../common/config/appearance-options";
-import { pluginToggle } from "./settings/elements/plugin-toggle";
+import pluginToggle from "./settings/elements/plugin-toggle";
 import { deepCopy } from "../common/helpers/object-helpers";
 import { PluginType } from "../main/plugin-type";
 import { TranslationSet } from "../common/translation/translation-set";
@@ -401,5 +401,4 @@ document.onkeydown = (event: KeyboardEvent) => {
   app.mainWindowGlobalKeyPress(event);
 };
 export default app;
-
 </script>
