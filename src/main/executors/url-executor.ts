@@ -1,5 +1,5 @@
 import { shell } from "electron";
 
-export function openUrlInBrowser(url: string): Promise<void> {
-    return shell.openExternal(url);
+export default function openUrlInBrowser(url: string): Promise<void> {
+  return shell.openExternal(url);
 }

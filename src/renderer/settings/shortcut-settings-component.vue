@@ -140,7 +140,7 @@ import {
   getDefaultShortcutIcon
 } from "../../main/plugins/shortcuts-search-plugin/shortcut-helpers";
 import { Shortcut } from "../../main/plugins/shortcuts-search-plugin/shortcut";
-import { ShortcutType } from "../../main/plugins/shortcuts-search-plugin/shortcut-type";
+import ShortcutType from "../../main/plugins/shortcuts-search-plugin/shortcut-type";
 import ModalEditMode from "./modals/modal-edit-mode";
 import {
   UserConfirmationDialogParams,

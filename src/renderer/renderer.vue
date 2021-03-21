@@ -20,7 +20,7 @@ import getTranslationSet from "../common/translation/translation-set-manager";
 import { AppearanceOptions } from "../common/config/appearance-options";
 import pluginToggle from "./settings/elements/plugin-toggle";
 import { deepCopy } from "../common/helpers/object-helpers";
-import { PluginType } from "../main/plugin-type";
+import PluginType from "../main/plugin-type";
 import { TranslationSet } from "../common/translation/translation-set";
 
 import userInputComponent from "./user-input-component.vue";

@@ -1,5 +1,5 @@
 import { ExecutionPlugin } from "../../execution-plugin";
-import { PluginType } from "../../plugin-type";
+import PluginType from "../../plugin-type";
 import { DictionaryOptions } from "../../../common/config/dictionary-options";
 import { SearchResultItem } from "../../../common/search-result-item";
 import { UserConfigOptions } from "../../../common/config/user-config-options";
@@ -9,106 +9,125 @@ import { defaultDictionaryIcon } from "../../../common/icon/default-icons";
 import { capitalize } from "../../../common/helpers/string-helpers";
 
 interface DictionaryResult {
-    definition: string;
-    type: string;
-    synonyms: string[];
+  definition: string;
+  type: string;
+  synonyms: string[];
 }
 
-export class DictionaryPlugin implements ExecutionPlugin {
-    public pluginType = PluginType.Dictionary;
-    private config: DictionaryOptions;
-    private readonly clipboardCopier: (value: string) => Promise<void>;
-    private readonly definitionRetriever: (word: string) => Promise<Definition[]>;
-    private delay: NodeJS.Timeout | number | undefined;
+export default class DictionaryPlugin implements ExecutionPlugin {
+  public pluginType = PluginType.Dictionary;
 
-    constructor(
-        config: DictionaryOptions,
-        clipboardCopier: (value: string) => Promise<void>,
-        definitionRetriever: (word: string) => Promise<Definition[]>,
-    ) {
-        this.config = config;
-        this.clipboardCopier = clipboardCopier;
-        this.definitionRetriever = definitionRetriever;
-    }
+  private config: DictionaryOptions;
 
-    public isValidUserInput(userInput: string, fallback?: boolean | undefined): boolean {
-        const searchTerm = this.getSearchTerm(userInput);
-        return userInput.startsWith(this.config.prefix)
-            && searchTerm.length >= this.config.minSearchTermLength;
-    }
+  private readonly clipboardCopier: (value: string) => Promise<void>;
 
-    public getSearchResults(userInput: string, fallback?: boolean | undefined): Promise<SearchResultItem[]> {
-        const searchTerm = this.getSearchTerm(userInput);
-        return new Promise((resolve, reject) => {
-            if (this.delay) {
-                clearTimeout(this.delay as number);
-            }
+  private readonly definitionRetriever: (word: string) => Promise<Definition[]>;
 
-            this.delay = setTimeout(() => {
-                this.definitionRetriever(searchTerm)
-                    .then((definitions) => resolve(this.buildSearchResults(definitions)))
-                    .catch((err) => reject(err));
-            }, this.config.debounceDelay);
-        });
-    }
+  private delay: NodeJS.Timeout | number | undefined;
 
-    public isEnabled(): boolean {
-        return this.config.isEnabled;
-    }
+  constructor(
+    config: DictionaryOptions,
+    clipboardCopier: (value: string) => Promise<void>,
+    definitionRetriever: (word: string) => Promise<Definition[]>
+  ) {
+    this.config = config;
+    this.clipboardCopier = clipboardCopier;
+    this.definitionRetriever = definitionRetriever;
+  }
 
-    public execute(searchResultItem: SearchResultItem, privileged: boolean): Promise<void> {
-        return this.clipboardCopier(searchResultItem.executionArgument);
-    }
+  public isValidUserInput(
+    userInput: string,
+    fallback?: boolean | undefined
+  ): boolean {
+    const searchTerm = this.getSearchTerm(userInput);
+    return (
+      userInput.startsWith(this.config.prefix) &&
+      searchTerm.length >= this.config.minSearchTermLength
+    );
+  }
 
-    public updateConfig(updatedConfig: UserConfigOptions, translationSet: TranslationSet): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.config = updatedConfig.dictionaryOptions;
-            resolve();
-        });
-    }
+  public getSearchResults(
+    userInput: string,
+    fallback?: boolean | undefined
+  ): Promise<SearchResultItem[]> {
+    const searchTerm = this.getSearchTerm(userInput);
+    return new Promise((resolve, reject) => {
+      if (this.delay) {
+        clearTimeout(this.delay as number);
+      }
 
-    private getSearchTerm(userInput: string): string {
-        return userInput.replace(this.config.prefix, "");
-    }
+      this.delay = setTimeout(() => {
+        this.definitionRetriever(searchTerm)
+          .then(definitions => resolve(this.buildSearchResults(definitions)))
+          .catch(err => reject(err));
+      }, this.config.debounceDelay);
+    });
+  }
 
-    private buildSearchResults(definitions: Definition[]): SearchResultItem[] {
-        const dictionaryResults: DictionaryResult[] = [];
+  public isEnabled(): boolean {
+    return this.config.isEnabled;
+  }
 
-        definitions.forEach((definition) => {
-            const keys = Object.keys(definition.meaning);
-            keys.forEach((key) => {
-                definition.meaning[key]
-                    .filter((entry: any) => {
-                        return entry.definition;
-                    })
-                    .forEach((entry: any) => {
-                        dictionaryResults.push({
-                            definition: entry.definition,
-                            synonyms: entry.synonyms ? entry.synonyms : [],
-                            type: capitalize(key),
-                        });
-                    });
+  public execute(
+    searchResultItem: SearchResultItem,
+    privileged: boolean
+  ): Promise<void> {
+    return this.clipboardCopier(searchResultItem.executionArgument);
+  }
+
+  public updateConfig(
+    updatedConfig: UserConfigOptions,
+    translationSet: TranslationSet
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.config = updatedConfig.dictionaryOptions;
+      resolve();
+    });
+  }
+
+  private getSearchTerm(userInput: string): string {
+    return userInput.replace(this.config.prefix, "");
+  }
+
+  private buildSearchResults(definitions: Definition[]): SearchResultItem[] {
+    const dictionaryResults: DictionaryResult[] = [];
+
+    definitions.forEach(definition => {
+      const keys = Object.keys(definition.meaning);
+      keys.forEach(key => {
+        definition.meaning[key]
+          .filter((entry: any) => {
+            return entry.definition;
+          })
+          .forEach((entry: any) => {
+            dictionaryResults.push({
+              definition: entry.definition,
+              synonyms: entry.synonyms ? entry.synonyms : [],
+              type: capitalize(key)
             });
-        });
+          });
+      });
+    });
 
-        return dictionaryResults.map((result): SearchResultItem => {
-            return {
-                description: result.definition,
-                executionArgument: result.definition,
-                hideMainWindowAfterExecution: true,
-                icon: defaultDictionaryIcon,
-                name: this.buildName(result),
-                originPluginType: this.pluginType,
-                searchable: [],
-            };
-        });
-    }
+    return dictionaryResults.map(
+      (result): SearchResultItem => {
+        return {
+          description: result.definition,
+          executionArgument: result.definition,
+          hideMainWindowAfterExecution: true,
+          icon: defaultDictionaryIcon,
+          name: this.buildName(result),
+          originPluginType: this.pluginType,
+          searchable: []
+        };
+      }
+    );
+  }
 
-    private buildName(result: DictionaryResult): string {
-        const suffix = result.synonyms.length > 0
-            ? ` - ${result.synonyms.join(", ")}`
-            : "";
+  private buildName(result: DictionaryResult): string {
+    const suffix =
+      result.synonyms.length > 0 ? ` - ${result.synonyms.join(", ")}` : "";
 
-        return `[${result.type}]${suffix}`;
-    }
+    return `[${result.type}]${suffix}`;
+  }
 }

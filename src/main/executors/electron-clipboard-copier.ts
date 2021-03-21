@@ -1,8 +1,8 @@
 import { clipboard } from "electron";
 
-export function electronClipboardCopier(value: string): Promise<void> {
-    return new Promise((resolve) => {
-        clipboard.writeText(value);
-        resolve();
-    });
+export default function electronClipboardCopier(value: string): Promise<void> {
+  return new Promise(resolve => {
+    clipboard.writeText(value);
+    resolve();
+  });
 }

@@ -1,4 +1,4 @@
-import { WorkflowExecutionArgumentType } from "../../main/plugins/workflow-plugin/workflow-execution-argument-type";
+import WorkflowExecutionArgumentType from "../../main/plugins/workflow-plugin/workflow-execution-argument-type";
 import { TranslationSet } from "../../common/translation/translation-set";
 
 export function getWorkflowExecutionArgumentTypeIcon(

@@ -146,7 +146,7 @@ import PluginSettings from "./plugin-settings";
 import vueEventDispatcher from "../vue-event-dispatcher";
 import VueEventChannels from "../vue-event-channels";
 import { defaultTranslationOptions } from "../../common/config/translation-options";
-import { TranslationLanguage } from "../../main/plugins/translation-plugin/translation-language";
+import TranslationLanguage from "../../main/plugins/translation-plugin/translation-language";
 import {
   UserConfirmationDialogParams,
   UserConfirmationDialogType

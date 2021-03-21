@@ -2,72 +2,97 @@ import { SearchPlugin } from "../../search-plugin";
 import { SearchResultItem } from "../../../common/search-result-item";
 import { UserConfigOptions } from "../../../common/config/user-config-options";
 import { TranslationSet } from "../../../common/translation/translation-set";
-import { PluginType } from "../../plugin-type";
+import PluginType from "../../plugin-type";
 import { UwpApplication } from "./uwp-application";
 import { UwpSearchOptions } from "../../../common/config/uwp-search-options";
 
-export class UwpPlugin implements SearchPlugin {
-    public pluginType = PluginType.Uwp;
-    private config: UwpSearchOptions;
-    private uwpApps: UwpApplication[];
-    private readonly filePathExecutor: (executionArgument: string, privileged: boolean) => Promise<void>;
-    private readonly uwpAppsRetriever: (alreadyKnownApps: UwpApplication[]) => Promise<UwpApplication[]>;
+export default class UwpPlugin implements SearchPlugin {
+  public pluginType = PluginType.Uwp;
 
-    constructor(
-        config: UwpSearchOptions,
-        filePathExecutor: (executionArgument: string, privileged: boolean) => Promise<void>,
-        uwpAppsRetriever: (alreadyKnownApps: UwpApplication[]) => Promise<UwpApplication[]>
-    ) {
-        this.config = config;
-        this.filePathExecutor = filePathExecutor;
-        this.uwpAppsRetriever = uwpAppsRetriever;
-        this.uwpApps = [];
-    }
+  private config: UwpSearchOptions;
 
-    public getAll(): Promise<SearchResultItem[]> {
-        return new Promise((resolve) => resolve(this.createSearchResults(this.uwpApps)));
-    }
+  private uwpApps: UwpApplication[];
 
-    public refreshIndex(): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.uwpAppsRetriever(this.uwpApps)
-                .then((apps) => {
-                    this.uwpApps = apps;
-                    resolve();
-                })
-                .catch((error) => reject(error));
-        });
-    }
+  private readonly filePathExecutor: (
+    executionArgument: string,
+    privileged: boolean
+  ) => Promise<void>;
 
-    public clearCache(): Promise<void> {
-        return new Promise((resolve) => resolve());
-    }
+  private readonly uwpAppsRetriever: (
+    alreadyKnownApps: UwpApplication[]
+  ) => Promise<UwpApplication[]>;
 
-    public isEnabled(): boolean {
-        return this.config.isEnabled;
-    }
+  constructor(
+    config: UwpSearchOptions,
+    filePathExecutor: (
+      executionArgument: string,
+      privileged: boolean
+    ) => Promise<void>,
+    uwpAppsRetriever: (
+      alreadyKnownApps: UwpApplication[]
+    ) => Promise<UwpApplication[]>
+  ) {
+    this.config = config;
+    this.filePathExecutor = filePathExecutor;
+    this.uwpAppsRetriever = uwpAppsRetriever;
+    this.uwpApps = [];
+  }
 
-    public execute(searchResultItem: SearchResultItem, privileged: boolean): Promise<void> {
-        return this.filePathExecutor(searchResultItem.executionArgument, privileged);
-    }
+  public getAll(): Promise<SearchResultItem[]> {
+    return new Promise(resolve =>
+      resolve(this.createSearchResults(this.uwpApps))
+    );
+  }
 
-    public updateConfig(updatedConfig: UserConfigOptions, translationSet: TranslationSet): Promise<void> {
-        return new Promise((resolve) => {
-            this.config = updatedConfig.uwpSearchOptions;
-            resolve();
-        });
-    }
+  public refreshIndex(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.uwpAppsRetriever(this.uwpApps)
+        .then(apps => {
+          this.uwpApps = apps;
+          resolve();
+        })
+        .catch(error => reject(error));
+    });
+  }
 
-    private createSearchResults(uwpApps: UwpApplication[]): SearchResultItem[] {
-        return uwpApps.map((uwpApp) => ({
-            description: "UWP App",
-            executionArgument: `shell:AppsFolder\\${uwpApp.appId}`,
-            hideMainWindowAfterExecution: true,
-            icon: uwpApp.icon,
-            name: uwpApp.name,
-            needsUserConfirmationBeforeExecution: false,
-            originPluginType: this.pluginType,
-            searchable: [uwpApp.name],
-        }));
-    }
+  public clearCache(): Promise<void> {
+    return new Promise(resolve => resolve());
+  }
+
+  public isEnabled(): boolean {
+    return this.config.isEnabled;
+  }
+
+  public execute(
+    searchResultItem: SearchResultItem,
+    privileged: boolean
+  ): Promise<void> {
+    return this.filePathExecutor(
+      searchResultItem.executionArgument,
+      privileged
+    );
+  }
+
+  public updateConfig(
+    updatedConfig: UserConfigOptions,
+    translationSet: TranslationSet
+  ): Promise<void> {
+    return new Promise(resolve => {
+      this.config = updatedConfig.uwpSearchOptions;
+      resolve();
+    });
+  }
+
+  private createSearchResults(uwpApps: UwpApplication[]): SearchResultItem[] {
+    return uwpApps.map(uwpApp => ({
+      description: "UWP App",
+      executionArgument: `shell:AppsFolder\\${uwpApp.appId}`,
+      hideMainWindowAfterExecution: true,
+      icon: uwpApp.icon,
+      name: uwpApp.name,
+      needsUserConfirmationBeforeExecution: false,
+      originPluginType: this.pluginType,
+      searchable: [uwpApp.name]
+    }));
+  }
 }

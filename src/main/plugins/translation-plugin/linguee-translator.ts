@@ -1,37 +1,40 @@
 import axios from "axios";
 
 interface WordType {
-    pos: string;
+  pos: string;
 }
 
 interface Translation {
-    text: string;
-    word_type: WordType;
+  text: string;
+  wordType: WordType;
 }
 
 interface ExactMatch {
-    translations: Translation[];
+  translations: Translation[];
 }
 
 interface TranslationResponse {
-    exact_matches?: ExactMatch[];
+  exactMatches?: ExactMatch[];
 }
 
-export class LingueeTranslator {
-    public static getTranslations(url: string): Promise<Translation[]> {
-        return new Promise((resolve, reject) => {
-            axios.get(url)
-                .then((response) => {
-                    const data = response.data as TranslationResponse;
-                    let translations: Translation[] = [];
-                    if (data.exact_matches) {
-                        data.exact_matches
-                            .map((exactMatch) => exactMatch.translations)
-                            .forEach((t) => translations = translations.concat(t));
-                    }
-                    resolve(translations);
-                })
-                .catch((err) => reject(err));
-        });
-    }
+export default class LingueeTranslator {
+  public static getTranslations(url: string): Promise<Translation[]> {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(url)
+        .then(response => {
+          const data = response.data as TranslationResponse;
+          let translations: Translation[] = [];
+          if (data.exactMatches) {
+            data.exactMatches
+              .map(exactMatch => exactMatch.translations)
+              .forEach(t => {
+                translations = translations.concat(t);
+              });
+          }
+          resolve(translations);
+        })
+        .catch(err => reject(err));
+    });
+  }
 }

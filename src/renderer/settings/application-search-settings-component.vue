@@ -221,7 +221,7 @@ import {
 import { defaultApplicationSearchOptions } from "../../common/config/application-search-options";
 import { deepCopy } from "../../common/helpers/object-helpers";
 import { getCurrentOperatingSystem } from "../../common/helpers/operating-system-helpers";
-import { PluginType } from "../../main/plugin-type";
+import PluginType from "../../main/plugin-type";
 import { OperatingSystem } from "../../common/operating-system";
 
 const operatingSystem = getCurrentOperatingSystem(platform());

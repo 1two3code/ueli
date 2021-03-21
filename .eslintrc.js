@@ -11,6 +11,7 @@ module.exports = {
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
     "import/no-unresolved": 0,
-    "vue/no-mutating-props": 0
+    "vue/no-mutating-props": 0,
+    "class-methods-use-this": 0
   }
 };

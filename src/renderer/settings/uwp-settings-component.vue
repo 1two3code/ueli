@@ -31,7 +31,7 @@ import VueEventChannels from "../vue-event-channels";
 import { UserConfigOptions } from "../../common/config/user-config-options";
 import { defaultUwpSearchOptions } from "../../common/config/uwp-search-options";
 import { deepCopy } from "../../common/helpers/object-helpers";
-import { PluginType } from "../../main/plugin-type";
+import PluginType from "../../main/plugin-type";
 
 export default Vue.extend({
   data() {

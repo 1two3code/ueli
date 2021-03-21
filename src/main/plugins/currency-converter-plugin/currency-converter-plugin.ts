@@ -1,5 +1,5 @@
 import { ExecutionPlugin } from "../../execution-plugin";
-import { PluginType } from "../../plugin-type";
+import PluginType from "../../plugin-type";
 import { SearchResultItem } from "../../../common/search-result-item";
 import { TranslationSet } from "../../../common/translation/translation-set";
 import { UserConfigOptions } from "../../../common/config/user-config-options";

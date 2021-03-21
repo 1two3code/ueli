@@ -1,7 +1,13 @@
-export function getRescanIntervalInMilliseconds(rescanIntervalInSeconds: number, minimumRescanIntervalInSeconds?: number): number {
-    if (minimumRescanIntervalInSeconds && rescanIntervalInSeconds < minimumRescanIntervalInSeconds) {
-        return minimumRescanIntervalInSeconds * 1000;
-    }
+export default function getRescanIntervalInMilliseconds(
+  rescanIntervalInSeconds: number,
+  minimumRescanIntervalInSeconds?: number
+): number {
+  if (
+    minimumRescanIntervalInSeconds &&
+    rescanIntervalInSeconds < minimumRescanIntervalInSeconds
+  ) {
+    return minimumRescanIntervalInSeconds * 1000;
+  }
 
-    return rescanIntervalInSeconds * 1000;
+  return rescanIntervalInSeconds * 1000;
 }

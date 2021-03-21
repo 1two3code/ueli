@@ -226,7 +226,7 @@ import VueEventChannels from "../../vue-event-channels";
 import { Workflow } from "../../../main/plugins/workflow-plugin/workflow";
 import { TranslationSet } from "../../../common/translation/translation-set";
 import ModalEditMode from "./modal-edit-mode";
-import { WorkflowExecutionArgumentType } from "../../../main/plugins/workflow-plugin/workflow-execution-argument-type";
+import WorkflowExecutionArgumentType from "../../../main/plugins/workflow-plugin/workflow-execution-argument-type";
 import {
   getWorkflowExecutionArgumentTypeIcon,
   getWorkflowExecutionArgumentTypeClass,

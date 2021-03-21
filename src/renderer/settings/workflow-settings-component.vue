@@ -152,7 +152,7 @@ import VueEventChannels from "../vue-event-channels";
 import PluginSettings from "./plugin-settings";
 import { UserConfigOptions } from "../../common/config/user-config-options";
 import { defaultWorkflowIcon } from "../../common/icon/default-icons";
-import { WorkflowExecutionArgumentType } from "../../main/plugins/workflow-plugin/workflow-execution-argument-type";
+import WorkflowExecutionArgumentType from "../../main/plugins/workflow-plugin/workflow-execution-argument-type";
 import { Workflow } from "../../main/plugins/workflow-plugin/workflow";
 import ModalEditMode from "./modals/modal-edit-mode";
 import {

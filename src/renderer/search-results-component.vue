@@ -64,7 +64,7 @@ import {
 import { Icon } from "../common/icon/icon";
 import IconType from "../common/icon/icon-type";
 import { AppearanceOptions } from "../common/config/appearance-options";
-import { PluginType } from "../main/plugin-type";
+import PluginType from "../main/plugin-type";
 import showLoaderDelay from "./renderer-helpers";
 
 // eslint-disable-next-line no-shadow

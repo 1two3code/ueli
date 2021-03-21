@@ -165,7 +165,7 @@ import { join } from "path";
 import vueEventDispatcher from "../../vue-event-dispatcher";
 import VueEventChannels from "../../vue-event-channels";
 import { Shortcut } from "../../../main/plugins/shortcuts-search-plugin/shortcut";
-import { ShortcutType } from "../../../main/plugins/shortcuts-search-plugin/shortcut-type";
+import ShortcutType from "../../../main/plugins/shortcuts-search-plugin/shortcut-type";
 import {
   defaultNewShortcut,
   isValidShortcutToAdd

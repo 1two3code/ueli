@@ -1,19 +1,29 @@
+import Powershell from "node-powershell";
 import { executeCommandWithOutput } from "../../executors/command-executor";
 import { ControlPanelItem } from "./control-panel-item";
-import Powershell from "node-powershell";
 
-export class ControlPanelItemsRetriever {
-    public static RetrieveControlPanelItems(alreadyKnownItems: ControlPanelItem[]): Promise<ControlPanelItem[]> {
-        return new Promise((resolve, reject) => {
-            this.executeCommandWithUtf8Output('powershell -NonInteractive -NoProfile -Command "Get-ControlPanelItem | ConvertTo-Json"')
-                .then((controlPanelItemsJson) => {
-                    const controlPanelItems: ControlPanelItem[] = JSON.parse(controlPanelItemsJson);
+export default class ControlPanelItemsRetriever {
+  public static RetrieveControlPanelItems(
+    alreadyKnownItems: ControlPanelItem[]
+  ): Promise<ControlPanelItem[]> {
+    return new Promise((resolve, reject) => {
+      this.executeCommandWithUtf8Output(
+        'powershell -NonInteractive -NoProfile -Command "Get-ControlPanelItem | ConvertTo-Json"'
+      )
+        .then(controlPanelItemsJson => {
+          const controlPanelItems: ControlPanelItem[] = JSON.parse(
+            controlPanelItemsJson
+          );
 
-                    const alreadyKnownItemsStillPresent = alreadyKnownItems.filter((item) => controlPanelItems.some((i) => i.Name === item.Name));
-                    const newControlPanelItems = controlPanelItems.filter((item) => !alreadyKnownItems.some((i) => i.Name === item.Name));
+          const alreadyKnownItemsStillPresent = alreadyKnownItems.filter(item =>
+            controlPanelItems.some(i => i.Name === item.Name)
+          );
+          const newControlPanelItems = controlPanelItems.filter(
+            item => !alreadyKnownItems.some(i => i.Name === item.Name)
+          );
 
-                    const iconSize = 128;
-                    const getIconsCommand = `
+          const iconSize = 128;
+          const getIconsCommand = `
             $iconExtractorCode = '${this.iconExtractorCode}';
             $iconExtractorType = Add-Type -TypeDefinition $iconExtractorCode -PassThru -ReferencedAssemblies 'System.Drawing.dll';
             $ErrorActionPreference = "SilentlyContinue";
@@ -38,27 +48,35 @@ export class ControlPanelItemsRetriever {
                 } |
                 ConvertTo-Json
                     `;
-                    const shell = new Powershell({});
-                    shell.addCommand(getIconsCommand)
-                        .then(() => shell.invoke())
-                        .then(
-                            (controlPanelItemIconsJson) => {
-                                const controlPanelItemIcons: { applicationName: string, iconBase64: string }[] = JSON.parse(controlPanelItemIconsJson);
-                                for (const icon of controlPanelItemIcons) {
-                                    const item = newControlPanelItems.find((i) => i.CanonicalName === icon.applicationName);
-                                    if (item != null && icon.iconBase64 != null) {
-                                        item.IconBase64 = icon.iconBase64;
-                                    }
-                                }
-                                resolve(alreadyKnownItemsStillPresent.concat(newControlPanelItems));
-                            })
-                        .finally(() => shell.dispose())
-                        .catch((reason) => reject(reason));
-                }).catch((reason) => reject(reason));
-        });
-    }
+          const shell = new Powershell({});
+          shell
+            .addCommand(getIconsCommand)
+            .then(() => shell.invoke())
+            .then(controlPanelItemIconsJson => {
+              const controlPanelItemIcons: {
+                applicationName: string;
+                iconBase64: string;
+              }[] = JSON.parse(controlPanelItemIconsJson);
+              controlPanelItemIcons.forEach(icon => {
+                const item = newControlPanelItems.find(
+                  i => i.CanonicalName === icon.applicationName
+                );
+                if (item != null && icon.iconBase64 != null) {
+                  item.IconBase64 = icon.iconBase64;
+                }
+              });
+              resolve(
+                alreadyKnownItemsStillPresent.concat(newControlPanelItems)
+              );
+            })
+            .finally(() => shell.dispose())
+            .catch(reason => reject(reason));
+        })
+        .catch(reason => reject(reason));
+    });
+  }
 
-    private static readonly iconExtractorCode = `
+  private static readonly iconExtractorCode = `
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -132,7 +150,9 @@ namespace IconExtractor
 }
     `;
 
-    private static executeCommandWithUtf8Output(command: string): Promise<string> {
-        return executeCommandWithOutput(`cmd /c chcp 65001>nul && ${command}`);
-    }
+  private static executeCommandWithUtf8Output(
+    command: string
+  ): Promise<string> {
+    return executeCommandWithOutput(`cmd /c chcp 65001>nul && ${command}`);
+  }
 }

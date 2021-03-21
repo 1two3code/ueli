@@ -37,7 +37,7 @@ import {
 import { deepCopy } from "../../common/helpers/object-helpers";
 import { defaultControlPanelOptions } from "../../common/config/control-panel-options";
 import SettingOsSpecific from "./settings-os-specific";
-import { PluginType } from "../../main/plugin-type";
+import PluginType from "../../main/plugin-type";
 
 export default Vue.extend({
   data() {

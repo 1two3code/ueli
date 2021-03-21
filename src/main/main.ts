@@ -24,7 +24,7 @@ import ElectronStoreConfigRepository from "../common/config/electron-store-confi
 import { AppearanceOptions } from "../common/config/appearance-options";
 import isDev from "../common/is-dev";
 import { UeliCommand } from "./plugins/ueli-command-search-plugin/ueli-command";
-import { UeliCommandExecutionArgument } from "./plugins/ueli-command-search-plugin/ueli-command-execution-argument";
+import UeliCommandExecutionArgument from "./plugins/ueli-command-search-plugin/ueli-command-execution-argument";
 import getProductionSearchEngine from "./production/production-search-engine";
 import { GlobalHotKey } from "../common/global-hot-key/global-hot-key";
 import { defaultGeneralOptions } from "../common/config/general-options";
@@ -38,7 +38,7 @@ import {
 } from "./helpers/tray-icon-helpers";
 import isValidHotKey from "../common/global-hot-key/global-hot-key-helpers";
 import NotificationType from "../common/notification-type";
-import { UserInputHistoryManager } from "./user-input-history-manager";
+import UserInputHistoryManager from "./user-input-history-manager";
 import {
   getCurrentOperatingSystem,
   getOperatingSystemVersion
@@ -57,9 +57,9 @@ import {
 } from "./helpers/window-icon-helpers";
 import { toHex } from "./plugins/color-converter-plugin/color-converter-helpers";
 import { deepCopy } from "../common/helpers/object-helpers";
-import { PluginType } from "./plugin-type";
-import { getRescanIntervalInMilliseconds } from "./helpers/rescan-interval-helpers";
-import { openUrlInBrowser } from "./executors/url-executor";
+import PluginType from "./plugin-type";
+import getRescanIntervalInMilliseconds from "./helpers/rescan-interval-helpers";
+import openUrlInBrowser from "./executors/url-executor";
 import { OperatingSystem } from "../common/operating-system";
 
 if (!FileHelpers.fileExistsSync(ueliTempFolder)) {

@@ -43,7 +43,7 @@
                       :value="browser"
                       v-bind:key="browser"
                     >
-                      {{ browser }}
+                      {Browser}
                     </option>
                   </select>
                 </div>
@@ -63,7 +63,7 @@ import VueEventChannels from "../vue-event-channels";
 import PluginSettings from "./plugin-settings";
 import { UserConfigOptions } from "../../common/config/user-config-options";
 import { defaultBrowserBookmarksOptions } from "../../common/config/browser-bookmarks-options";
-import { Browser } from "../../main/plugins/browser-bookmarks-plugin/browser";
+import Browser from "../../main/plugins/browser-bookmarks-plugin/browser";
 import { deepCopy } from "../../common/helpers/object-helpers";
 
 export default Vue.extend({

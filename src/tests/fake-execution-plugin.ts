@@ -1,6 +1,6 @@
 import { ExecutionPlugin } from "../main/execution-plugin";
 import { SearchResultItem } from "../common/search-result-item";
-import { PluginType } from "../main/plugin-type";
+import PluginType from "../main/plugin-type";
 import { UserConfigOptions } from "../common/config/user-config-options";
 import { TranslationSet } from "../common/translation/translation-set";
 

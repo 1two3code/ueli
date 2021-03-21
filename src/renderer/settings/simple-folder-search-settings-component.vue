@@ -127,7 +127,7 @@ import {
   UserConfirmationDialogType
 } from "./modals/user-confirmation-dialog-params";
 import { deepCopy } from "../../common/helpers/object-helpers";
-import { PluginType } from "../../main/plugin-type";
+import PluginType from "../../main/plugin-type";
 
 export default Vue.extend({
   data() {

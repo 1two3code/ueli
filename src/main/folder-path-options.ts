@@ -1,3 +1,3 @@
 export interface FilePathOptions {
-    showFullFilePath: boolean;
+  showFullFilePath: boolean;
 }

@@ -1,4 +1,4 @@
 export interface ApplicationIcon {
-    name: string;
-    filePathToPng: string;
+  name: string;
+  filePathToPng: string;
 }
