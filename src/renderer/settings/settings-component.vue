@@ -3,10 +3,7 @@
     <settings-loading-overlay></settings-loading-overlay>
     <div class="settings__sidebar menu">
       <div class="settings__sidebar-header-container">
-        <img
-          class="settings__sidebar-header-image"
-          src="../../../assets/ueli.svg"
-        />
+        <logo class="settings__sidebar-header-image" />
         <span class="settings__sidebar-header-title">{{
           translations.settings
         }}</span>
@@ -156,10 +153,15 @@ import { PluginSettings } from "./plugin-settings";
 import { SettingOsSpecific } from "./settings-os-specific";
 import { GeneralSettings } from "./general-settings";
 
+import logo from "../../../assets/ueli.svg";
+
 const autoHideErrorMessageDelayInMilliseconds = 5000;
 let autoHideErrorMessageTimeout: number;
 
 export default Vue.extend({
+  components: {
+    logo
+  },
   computed: {
     notificationClass() {
       let typeClass = "is-info";

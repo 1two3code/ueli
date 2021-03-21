@@ -400,4 +400,6 @@ const app = new Vue({
 document.onkeydown = (event: KeyboardEvent) => {
   app.mainWindowGlobalKeyPress(event);
 };
+export default app;
+
 </script>

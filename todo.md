@@ -3,6 +3,7 @@
 - use eslint over tslint
 - styling in scoped tags
 - vue3 https://johnpapa.net/vue2-to-vue3/
+- vuex (for config vue/no-mutating-pros ~)
 
 
 ##
