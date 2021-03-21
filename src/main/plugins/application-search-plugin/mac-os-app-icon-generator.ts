@@ -1,5 +1,5 @@
 import { join } from "path";
-import plist from "simple-plist";
+import { readFile } from "simple-plist";
 import { existsSync } from "fs";
 import FileHelpers from "../../../common/helpers/file-helpers";
 import {
@@ -58,7 +58,7 @@ function getPlistContent(
     if (!existsSync(plistFilePath)) {
       onError();
     } else {
-      plist.readFile(plistFilePath, (err, data) => {
+      readFile(plistFilePath, (err, data) => {
         if (err) {
           onError();
         } else {

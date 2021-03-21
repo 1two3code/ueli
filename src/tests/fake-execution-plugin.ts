@@ -1,43 +1,54 @@
-import { ExecutionPlugin } from "../main/execution-plugin";
+import { ExecutionPlugin } from "../main/execution-plugin";
 import { SearchResultItem } from "../common/search-result-item";
 import PluginType from "../main/plugin-type";
 import { UserConfigOptions } from "../common/config/user-config-options";
 import { TranslationSet } from "../common/translation/translation-set";
 
-export class FakeExecutionPlugin implements ExecutionPlugin {
-    public pluginType = PluginType.Test;
+export default class FakeExecutionPlugin implements ExecutionPlugin {
+  public pluginType = PluginType.Test;
 
-    private readonly validUserInput: boolean;
-    private readonly enabled: boolean;
-    private readonly searchResults: SearchResultItem[];
+  private readonly validUserInput: boolean;
 
-    constructor(
-        isEnabled: boolean,
-        isValidUserInput: boolean,
-        searchResults: SearchResultItem[],
-    ) {
-        this.enabled = isEnabled;
-        this.validUserInput = isValidUserInput;
-        this.searchResults = searchResults;
-    }
+  private readonly enabled: boolean;
 
-    public isValidUserInput(userInput: string, fallback?: boolean): boolean {
-        return this.validUserInput;
-    }
+  private readonly searchResults: SearchResultItem[];
 
-    public getSearchResults(userInput: string, fallback?: boolean): Promise<SearchResultItem[]> {
-        return Promise.resolve(this.searchResults);
-    }
+  constructor(
+    isEnabled: boolean,
+    isValidUserInput: boolean,
+    searchResults: SearchResultItem[]
+  ) {
+    this.enabled = isEnabled;
+    this.validUserInput = isValidUserInput;
+    this.searchResults = searchResults;
+  }
 
-    public isEnabled(): boolean {
-        return this.enabled;
-    }
+  public isValidUserInput(userInput: string, fallback?: boolean): boolean {
+    return this.validUserInput;
+  }
 
-    public execute(searchResultItem: SearchResultItem, privileged: boolean): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+  public getSearchResults(
+    userInput: string,
+    fallback?: boolean
+  ): Promise<SearchResultItem[]> {
+    return Promise.resolve(this.searchResults);
+  }
 
-    public updateConfig(updatedConfig: UserConfigOptions, translationSet: TranslationSet): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+  public isEnabled(): boolean {
+    return this.enabled;
+  }
+
+  public execute(
+    searchResultItem: SearchResultItem,
+    privileged: boolean
+  ): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+
+  public updateConfig(
+    updatedConfig: UserConfigOptions,
+    translationSet: TranslationSet
+  ): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }

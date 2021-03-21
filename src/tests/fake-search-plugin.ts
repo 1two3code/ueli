@@ -4,55 +4,68 @@ import { SearchResultItem } from "../common/search-result-item";
 import { UserConfigOptions } from "../common/config/user-config-options";
 import { TranslationSet } from "../common/translation/translation-set";
 
-export class FakeSearchPlugin implements SearchPlugin {
-    public pluginType: PluginType;
-    private readonly items: SearchResultItem[];
-    private readonly enabled: boolean;
-    private indexRefreshCount: number;
+export default class FakeSearchPlugin implements SearchPlugin {
+  public pluginType: PluginType;
 
-    constructor(pluginType: PluginType, items: SearchResultItem[], enabled: boolean) {
-        this.pluginType = pluginType;
-        this.items = items;
-        this.enabled = enabled;
-        this.indexRefreshCount = 0;
-    }
+  private readonly items: SearchResultItem[];
 
-    public getAll(): Promise<SearchResultItem[]> {
-        return new Promise((resolve) => {
-            resolve(this.items);
-        });
-    }
+  private readonly enabled: boolean;
 
-    public refreshIndex(): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.indexRefreshCount += 1;
-            resolve();
-        });
-    }
+  private indexRefreshCount: number;
 
-    public clearCache(): Promise<void> {
-        return new Promise((resolve, reject) => {
-            reject(new Error("Method not implemented."));
-        });
-    }
+  constructor(
+    pluginType: PluginType,
+    items: SearchResultItem[],
+    enabled: boolean
+  ) {
+    this.pluginType = pluginType;
+    this.items = items;
+    this.enabled = enabled;
+    this.indexRefreshCount = 0;
+  }
 
-    public isEnabled(): boolean {
-        return this.enabled;
-    }
+  public getAll(): Promise<SearchResultItem[]> {
+    return new Promise(resolve => {
+      resolve(this.items);
+    });
+  }
 
-    public execute(searchResultItem: SearchResultItem, privileged: boolean): Promise<void> {
-        return new Promise((resolve, reject) => {
-            reject(new Error("Method not implemented."));
-        });
-    }
+  public refreshIndex(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.indexRefreshCount += 1;
+      resolve();
+    });
+  }
 
-    public updateConfig(updatedConfig: UserConfigOptions, translationSet: TranslationSet): Promise<void> {
-        return new Promise((resolve, reject) => {
-            reject(new Error("Method not implemented."));
-        });
-    }
+  public clearCache(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      reject(new Error("Method not implemented."));
+    });
+  }
 
-    public getIndexRefreshCount() {
-        return this.indexRefreshCount;
-    }
+  public isEnabled(): boolean {
+    return this.enabled;
+  }
+
+  public execute(
+    searchResultItem: SearchResultItem,
+    privileged: boolean
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      reject(new Error("Method not implemented."));
+    });
+  }
+
+  public updateConfig(
+    updatedConfig: UserConfigOptions,
+    translationSet: TranslationSet
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      reject(new Error("Method not implemented."));
+    });
+  }
+
+  public getIndexRefreshCount() {
+    return this.indexRefreshCount;
+  }
 }

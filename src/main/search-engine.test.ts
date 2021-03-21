@@ -1,14 +1,14 @@
 import SearchEngine from "./search-engine";
 import { SearchPlugin } from "./search-plugin";
 import englishTranslationSet from "../common/translation/english-translation-set";
-import { FakeSearchPlugin } from "../tests/fake-search-plugin";
-import { FakeExecutionPlugin } from "../tests/fake-execution-plugin";
+import FakeSearchPlugin from "../tests/fake-search-plugin";
+import FakeExecutionPlugin from "../tests/fake-execution-plugin";
 import { SearchResultItem } from "../common/search-result-item";
 import PluginType from "./plugin-type";
-import { dummyIcon } from "../tests/dummy-icon";
+import dummyIcon from "../tests/dummy-icon";
 import { ExecutionPlugin } from "./execution-plugin";
 import { TranslationSet } from "../common/translation/translation-set";
-import { FakeFavoriteRepository } from "../tests/fake-favorite-repository";
+import FakeFavoriteRepository from "../tests/fake-favorite-repository";
 import {
   defaultSearchEngineOptions,
   SearchEngineOptions
